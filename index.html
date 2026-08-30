@@ -8,6 +8,25 @@
   <link rel="stylesheet" href="style.css" />
   <link rel="icon" href="favicon.ico" />
   <meta name="google-adsense-account" content="ca-pub-1921965753258324" />
+
+  <!-- Google Consent Mode v2: default DENIED for EU/GB/CH, granted elsewhere.
+       The certified CMP below updates this after the visitor decides. -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('consent', 'default', {
+      ad_storage: 'denied',
+      ad_user_data: 'denied',
+      ad_personalization: 'denied',
+      analytics_storage: 'denied',
+      region: ['EU', 'GB', 'CH']
+    });
+  </script>
+  <!-- Google-certified CMP (Funding Choices). IMPORTANT: enable the consent
+       message in AdSense -> Privacy & messaging first, otherwise this shows nothing. -->
+  <script async src="https://fundingchoicesmessages.google.com/i/ca-pub-1921965753258324?ship=0"></script>
+  <!-- AdSense loader. Gated by Consent Mode — no ad cookies until consent is set. -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1921965753258324" crossorigin="anonymous"></script>
 </head>
 <body>
   <div class="app">
@@ -46,16 +65,11 @@
     </div>
   </div>
 
-  <!-- Consent gate for ads (UK GDPR / PECR) -->
-  <div id="consent" class="consent">
-    <div class="consent-card">
-      <p>We use cookies to show relevant ads. Accept to support this free tool. You can decline and still use everything. <a href="privacy.html">Privacy Policy</a></p>
-      <div class="consent-btns">
-        <button id="consentAccept" class="consent-accept">Accept</button>
-        <button id="consentReject" class="consent-reject">Decline</button>
-      </div>
-    </div>
-  </div>
+  <footer class="site-footer">
+    <a href="privacy.html">Privacy Policy</a>
+    <span aria-hidden="true">·</span>
+    <a href="https://www.google.com/settings/ads" rel="noopener" target="_blank">Ad Settings</a>
+  </footer>
 
   <script src="config.js"></script>
   <script src="data.js"></script>
