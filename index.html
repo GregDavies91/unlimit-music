@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Free Guitar Chords &amp; Root Notes — Play &amp; Learn</title>
+  <meta name="description" content="Tap a root note to hear it, then tap a chord to hear and see how to play it on guitar. Free guitar chord charts and audio for every key." />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="favicon.ico" />
+</head>
+<body>
+  <div class="app">
+    <!-- left fixed rainbow root column -->
+    <nav class="roots" aria-label="Root notes">
+      <div id="rootRow" class="root-col"></div>
+    </nav>
+
+    <!-- right: diagram stage (top) + chord grid (below) -->
+    <main class="stage">
+      <!-- ad slot at the very top of the stage -->
+      <div id="ad-slot" class="ad-slot" aria-label="Advertisement"></div>
+
+      <section class="diagram-box" aria-label="Chord diagram">
+        <div class="diagram-stage">
+          <img id="diagramImg" alt="Guitar chord diagram" />
+        </div>
+      </section>
+
+      <section class="chords" aria-label="Chords in this key">
+        <div id="chordRow" class="chord-grid"></div>
+      </section>
+    </main>
+  </div>
+
+  <!-- popup toast for placeholder buttons -->
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <!-- first-load instruction pointing at the root column (on the LEFT) -->
+  <div id="onboard" class="onboard">
+    <div class="onboard-arrow" aria-hidden="true">&#11013;</div>
+    <div class="onboard-card">
+      <h2>Start here</h2>
+      <p>Tap a <b>root note</b> on the left to hear it, then tap any chord to hear and see how to play it.</p>
+      <button id="onboardOk" class="onboard-ok">Got it</button>
+    </div>
+  </div>
+
+  <!-- Consent gate for ads (UK GDPR / PECR) -->
+  <div id="consent" class="consent">
+    <div class="consent-card">
+      <p>We use cookies to show relevant ads. Accept to support this free tool. You can decline and still use everything.</p>
+      <div class="consent-btns">
+        <button id="consentAccept" class="consent-accept">Accept</button>
+        <button id="consentReject" class="consent-reject">Decline</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="config.js"></script>
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+  <script src="consent-ads.js"></script>
+</body>
+</html>
