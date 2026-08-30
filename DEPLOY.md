@@ -13,6 +13,21 @@ Do NOT commit `__MACOSX/`, `.DS_Store`, or the `analyze.py` / `build_assets.py` 
 to the public repo (they're local tooling, not the product). Actually build_assets.py is fine
 to keep but not required for the live site.
 
+### GitHub Desktop workflow (recommended)
+1. In GitHub Desktop, open/clone the `unlimitmusic` repo.
+2. Create a branch: **Branch → New Branch** → e.g. `consent-update`.
+3. Copy the site files into the local repo folder (replacing old ones), or
+   extract `unlimitmusic-deploy.zip` (built by Hermes) into it.
+4. **Commit** with a clear message (e.g. `Add certified Google CMP consent`).
+5. **Push origin** → **Branch → Create Pull Request** → review → **Merge into main**.
+6. Cloudflare Pages auto-redeploys from `main`. (See section 2.)
+
+### Deploy zip (built by Hermes)
+A ready-to-ship archive is produced at
+`/workspaces/hermes/greg/projects/unlimit-music-deploy.zip`
+(941 files, excludes the stale `unlimitmusic.zip` and dev junk). Extract and
+use the GitHub Desktop steps above.
+
 ## 2. Cloudflare Pages (free)
 - Cloudflare dashboard → Workers & Pages → Create → Pages → connect the GitHub repo.
 - Build settings: **Framework preset = None**, **Build command = (empty)**,
@@ -34,8 +49,16 @@ to keep but not required for the live site.
   (also replace the `data-ad-slot="0000000000"` in consent-ads.js with the real ad unit
   slot from your AdSense ad unit, OR use Auto ads — then the slot line is optional).
 - Commit + redeploy.
-- IMPORTANT: the ad script ONLY loads after the visitor clicks **Accept** (consent-ads.js).
-  This keeps you compliant with UK GDPR/PECR so AdSense doesn't ban the account.
+- **Consent is now certified:** `index.html` loads Google Consent Mode v2 (default
+  DENIED for EU/GB/CH) + Google's certified CMP (Funding Choices) + the AdSense
+  loader. No homemade Accept/Decline gate — Google's own consent message handles
+  the legal signal, which is what makes AdSense's review pass. This keeps you
+  compliant with EU/UK/CH GDPR + the Google European consent policy.
+- **Consent message is already created & active** in AdSense → Privacy & messaging
+  (you selected Google's CMP, "1 active" under European regulations, with the
+  3-choice Consent / Do not consent / Manage options). Just make sure you clicked
+  **Publish changes** so it serves. Until it's live, `fundingchoicesmessages.google.com`
+  serves nothing and the banner stays hidden — that's expected, not an error.
 - Verification: Google may ask you to put a meta-tag / HTML file. For the HTML-file method,
   drop `googleXXXX.html` in this folder and redeploy. For meta-tag, add it to <head> in index.html.
 

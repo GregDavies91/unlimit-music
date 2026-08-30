@@ -310,6 +310,19 @@ button.chord-btn.root.active {
 .consent-reject { background: transparent; color: var(--muted); border: 1px solid var(--line); }
 .consent-accept:hover { filter: brightness(1.1); }
 
+/* ---- site footer (privacy + ad settings links) ---- */
+.site-footer {
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+  justify-content: center;
+  padding: 1.2rem 1rem 2rem;
+  font-size: .8rem;
+  color: var(--muted);
+}
+.site-footer a { color: var(--muted); text-decoration: none; }
+.site-footer a:hover { color: var(--neon); }
+
 /* ---- standalone legal / privacy page ---- */
 .legal {
   max-width: 720px;
