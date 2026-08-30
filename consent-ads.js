@@ -15,8 +15,8 @@
   function loadAds() {
     if (!slot) return;
     if (PUB.indexOf("REPLACE") !== -1) {
-      // Not configured yet -> keep layout stable with a placeholder.
-      slot.innerHTML = '<div class="ad-placeholder">Ad space &mdash; set ADSENSE_PUB_ID in config.js</div>';
+      // Not configured yet -> keep the slot silently empty (no placeholder text).
+      slot.innerHTML = '';
       return;
     }
 
