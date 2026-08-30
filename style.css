@@ -309,3 +309,15 @@ button.chord-btn.root.active {
 .consent-accept { background: var(--neon); color: #06070a; }
 .consent-reject { background: transparent; color: var(--muted); border: 1px solid var(--line); }
 .consent-accept:hover { filter: brightness(1.1); }
+
+/* ---- standalone legal / privacy page ---- */
+.legal {
+  max-width: 720px;
+  margin: 6vh auto;
+  padding: 0 1.2rem;
+  line-height: 1.6;
+}
+.legal h1 { font-size: 1.8rem; margin-bottom: .3rem; }
+.legal h2 { font-size: 1.1rem; margin: 1.6rem 0 .4rem; color: var(--neon); }
+.legal p { color: var(--text); margin: .4rem 0; }
+.legal a { color: var(--neon); }

@@ -1,31 +1,42 @@
 // Consent-gated ads (UK GDPR / PECR).
 // AdSense script is injected ONLY after an explicit Accept click.
-// Reject => no ad script ever loads. Network-agnostic: set SITE_CONFIG.ADSENSE_PUB_ID.
+// Reject => no ad script ever loads.
+// Set SITE_CONFIG.ADSENSE_PUB_ID (and optionally ADSENSE_AD_SLOT) in config.js.
 (function () {
   "use strict";
 
-  var PUB = (window.SITE_CONFIG && window.SITE_CONFIG.ADSENSE_PUB_ID) || "ca-pub-REPLACE_WITH_YOUR_ID";
+  var cfg = window.SITE_CONFIG || {};
+  var PUB = cfg.ADSENSE_PUB_ID || "ca-pub-REPLACE_WITH_YOUR_ID";
+  var SLOT = cfg.ADSENSE_AD_SLOT || "REPLACE_WITH_AD_UNIT_SLOT";
   var slot = document.getElementById("ad-slot");
   var consentEl = document.getElementById("consent");
   var KEY = "um_consent";
 
   function loadAds() {
     if (!slot) return;
-    // build the auto ad (or a display ad). Using auto-ads: just load the script.
     if (PUB.indexOf("REPLACE") !== -1) {
-      // not configured yet -> show a placeholder so layout is stable
+      // Not configured yet -> keep layout stable with a placeholder.
       slot.innerHTML = '<div class="ad-placeholder">Ad space &mdash; set ADSENSE_PUB_ID in config.js</div>';
       return;
     }
+
+    // 1) Load the AdSense loader (only after consent).
     var s = document.createElement("script");
     s.async = true;
     s.crossOrigin = "anonymous";
     s.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=" + encodeURIComponent(PUB);
     document.head.appendChild(s);
-    // render an ad unit into the slot
-    slot.innerHTML = '<ins class="adsbygoogle" style="display:block" data-ad-client="' + PUB +
-      '" data-ad-slot="0000000000" data-ad-format="auto" data-full-width-responsive="true"></ins>';
-    (window.adsbygoogle = window.adsbygoogle || []).push({});
+
+    // 2) If a specific ad unit slot is configured, render it into the slot.
+    //    Otherwise fall back to Auto Ads (Google places ads automatically).
+    if (SLOT.indexOf("REPLACE") === -1) {
+      slot.innerHTML =
+        '<ins class="adsbygoogle" style="display:block" data-ad-client="' + PUB +
+        '" data-ad-slot="' + SLOT +
+        '" data-ad-format="auto" data-full-width-responsive="true"></ins>';
+      (window.adsbygoogle = window.adsbygoogle || []).push({});
+    }
+    // Auto Ads: no <ins> needed — once the script loads, Google injects ads.
   }
 
   function accept() {
@@ -43,7 +54,7 @@
   if (acc) acc.addEventListener("click", accept);
   if (rej) rej.addEventListener("click", reject);
 
-  // if already decided, honour it (don't re-prompt)
+  // Honour a previous decision (don't re-prompt).
   var decided = null;
   try { decided = localStorage.getItem(KEY); } catch (e) {}
   if (decided === "1") { if (consentEl) consentEl.classList.add("hide"); loadAds(); }
