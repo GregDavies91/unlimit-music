@@ -53,7 +53,7 @@
   // Pitch classes with C at the bottom of the octave (C lowest -> Bb highest),
   // so the rainbow roots rise C -> Bb instead of wrapping A -> low C.
   // A = 9 keeps A4 = 440 Hz (midi 69) true.
-  var SEMI = { A: 9, Bb: 10, B: 11, C: 0, Db: 1, D: 2, Eb: 3, E: 4, F: 5, Gb: 6, G: 7, Ab: 8 };
+  var SEMI = { C: 3, Db: 4, D: 5, Eb: 6, E: 7, F: 8, Gb: 9, G: 10, Ab: 11, A: 12, Bb: 13, B: 14 };
   function rootFreq(name) {
     var s = SEMI[name]; if (s === undefined) s = 0;
     return 440 * Math.pow(2, (s - 36) / 12); // 3 octaves below A440 (warm, low)

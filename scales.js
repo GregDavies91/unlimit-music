@@ -1,41 +1,19 @@
 // Scales wheel — a melody instrument by Ian "Ron" Davies.
-//
-// Design (locked with Greg):
-//  * 12 chromatic orbs in a circle, coloured like the left root column.
-//  * Top orb = tonic (lowest pitch). Moving clockwise = up a semitone.
-//    Pitch is fixed per POSITION, not per note name: rotating the wheel
-//    only moves which note sits at the top; it never re-pitches a note.
-//  * Polyphonic, no choking. Each press is its own synth voice.
-//  * A press plays a warm pluck (one-shot, decays). Orb lights while held;
-//    note name shows in the wheel centre while held.
-//  * Default = Chromatic (all 12 active). Picking a scale darkens the rest
-//    (still visible, but unpressable).
-//  * Drag OUTSIDE the orbs = spin the wheel; release snaps to nearest key
-//    (medium inertia, tunable below). Drag STARTING on an orb = play mode:
-//    even if the finger slips into the centre or off the wheel, it keeps
-//    playing notes (glissando) and does NOT rotate until released.
-//  * Octave sweep: the next note picks the octave nearest the last played
-//    pitch, so sweeping up keeps climbing, down keeps descending, and it
-//    wraps smoothly through octaves (no "Ab drops to a low A" jump).
-//  * Follow-chords (Settings): when ON, the tonic tracks the left-column
-//    root and manual rotation is locked. OFF by default.
-//  * Mobile multi-touch works: each touch is its own pointerId.
-
+// (Rewritten cleanly 2026-09-05: ring is now a visible draggable border
+//  OUTSIDE the orbs, no arrows, orb clicks play notes and don't start drags.)
 (function () {
   "use strict";
 
-  // ---- tunables (us, not the user) ----
-  var INERTIA_DECAY   = 0.93;   // per ~16ms frame; lower = stops sooner
-  var INERTIA_MAXVEL  = 0.020;  // rad/ms cap on flick velocity
-  var INERTIA_START   = 0.0007; // above this on release -> glide then snap
-  var SNAP_MS         = 160;    // snap-to-detent tween length
+  var INERTIA_DECAY   = 0.93;
+  var INERTIA_MAXVEL  = 0.020;
+  var INERTIA_START   = 0.0007;
+  var SNAP_MS         = 160;
 
   var ROOT_COLORS = {
     C:"#ff4d4d", Db:"#ff944d", D:"#ffd24d", Eb:"#c7e64d",
     E:"#6fe64d", F:"#4de6b0", Gb:"#4dc7e6", G:"#4d8cff",
     Ab:"#7d4dff", A:"#b04dff", Bb:"#e64dff", B:"#ff4dc7"
   };
-  // Pitch classes: C=0 .. B=11. A=9 so A4=440 (midi 69) stays true.
   var SEMI = { C:0, Db:1, D:2, Eb:3, E:4, F:5, Gb:6, G:7, Ab:8, A:9, Bb:10, B:11 };
   var CHROMA = ["C","Db","D","Eb","E","F","Gb","G","Ab","A","Bb","B"];
 
@@ -44,7 +22,6 @@
     iv.forEach(function (i) { m[((i % 12) + 12) % 12] = 1; });
     return m;
   }
-  // scale name -> 12-length mask (1 = in scale)
   var SCALES = {
     "Chromatic":        intervalsToMask([0,1,2,3,4,5,6,7,8,9,10,11]),
     "Major":            intervalsToMask([0,2,4,5,7,9,11]),
@@ -72,7 +49,6 @@
     if (audioCtx && audioCtx.state === "suspended") audioCtx.resume();
     return audioCtx;
   }
-  // warm guitar-ish pluck: triangle + sine, lowpass, fast attack, decay
   function playPluck(freq) {
     var ctx = ensureCtx();
     if (!ctx) return;
@@ -93,11 +69,27 @@
     o1.stop(now + dur); o2.stop(now + dur);
   }
   function midiToFreq(m) { return 440 * Math.pow(2, (m - 69) / 12); }
-  // pick the octave of `base` nearest to `last` (smooth sweep, no jump)
   function pickOctave(base, last) {
     if (last === null) return base;
-    var cands = [base - 12, base, base + 12], best = cands[0], bd = Math.abs(cands[0] - last);
-    for (var i = 1; i < 3; i++) {
+    var cands = [base - 36, base - 24, base - 12, base, base + 12, base + 24, base + 36];
+    if (state.pitchDir > 0) {
+      // Climbing: pick the lowest candidate strictly above last
+      var best = null;
+      for (var i = 0; i < cands.length; i++) {
+        if (cands[i] > last && (best === null || cands[i] < best)) best = cands[i];
+      }
+      return best !== null ? best : base + 12;
+    } else if (state.pitchDir < 0) {
+      // Descending: pick the highest candidate strictly below last
+      var best = null;
+      for (var i = 0; i < cands.length; i++) {
+        if (cands[i] < last && (best === null || cands[i] > best)) best = cands[i];
+      }
+      return best !== null ? best : base - 12;
+    }
+    // No direction (same note repeated): keep the same octave as last time
+    var best = cands[0], bd = Math.abs(cands[0] - last);
+    for (var i = 1; i < cands.length; i++) {
       var d = Math.abs(cands[i] - last);
       if (d < bd) { bd = d; best = cands[i]; }
     }
@@ -106,32 +98,49 @@
 
   // ---- state ----
   var state = {
-    tonic: 0,            // CHROMA index at the top position
-    rotation: 0,         // radians applied to the ring
+    tonic: 0,
+    rotation: 0,
     scaleName: "Chromatic",
     followChords: false,
     dragging: false,
-    mode: null,          // "play" | "rotate"
+    mode: null,
     lastAngle: 0,
     velocity: 0,
     lastMoveTime: 0,
-    held: {},            // pointerId -> position(0..11)
+    held: {},
     orbActive: new Array(12).fill(true),
-    lastPitch: null,     // last midi played (for octave sweep)
+    lastPitch: null,
+    // Track the last two semitone positions to detect pitch direction
+    // (up/down) for octave stepping when tapping.
+    lastSemitone: null,
+    pitchDir: 0,           // +1 = climbing, -1 = descending, 0 = unknown
     orbEls: [],
     ringEl: null
   };
 
-  var wheelEl, centerEl;
+  var wheelEl, centerEl, ringEl;
 
   // ---- build ----
   function buildWheel() {
     wheelEl = document.getElementById("scalesWheel");
     if (!wheelEl) return;
     wheelEl.innerHTML = "";
-    var ring = document.createElement("div");
-    ring.className = "scales-ring";
-    state.ringEl = ring;
+
+    // The RING: a visible circular border OUTSIDE the orbs. This is the drag
+    // surface. Orbs live INSIDE the ring (above it in z-order) so clicking an
+    // orb still plays a note.
+    ringEl = document.createElement("div");
+    ringEl.className = "scales-ring";
+    wheelEl.appendChild(ringEl);
+
+    // Center: shows the currently held/note name. A direct child of wheelEl
+    // (NOT the ring) so it never rotates — always stays upright.
+    centerEl = document.createElement("div");
+    centerEl.className = "scales-center";
+    centerEl.id = "scalesCenter";
+    wheelEl.appendChild(centerEl);
+
+    // Orbs INSIDE the ring, with their own pointer events.
     state.orbEls = [];
     for (var i = 0; i < 12; i++) {
       var orb = document.createElement("button");
@@ -140,14 +149,9 @@
       orb.dataset.pos = i;
       orb.textContent = CHROMA[i];
       orb.style.setProperty("--orb", ROOT_COLORS[CHROMA[i]]);
-      ring.appendChild(orb);
+      ringEl.appendChild(orb);
       state.orbEls.push(orb);
     }
-    wheelEl.appendChild(ring);
-    centerEl = document.createElement("div");
-    centerEl.className = "scales-center";
-    centerEl.id = "scalesCenter";
-    wheelEl.appendChild(centerEl);
 
     layoutWheel();
     computeOrbActive();
@@ -164,15 +168,18 @@
     var w = wheelEl.clientWidth, h = wheelEl.clientHeight;
     if (!w || !h) return;
     var minDim = Math.min(w, h);
-    var orbSize = Math.max(26, Math.min(40, minDim * 0.13));
-    var radius = minDim / 2 - orbSize / 2 - 4;
+    // Orbs cluster in the centre; the wide band between them and the outer
+    // ring edge is the draggable surface.
+    var orbSize = Math.max(26, Math.min(36, minDim * 0.10));
+    var radius = minDim * 0.30; // orb ring at 30% of wheel radius leaves a wide outer drag band
     state.orbEls.forEach(function (orb, i) {
-      var ang = (i / 12) * 2 * Math.PI - Math.PI / 2; // i=0 at top
+      var ang = (i / 12) * 2 * Math.PI - Math.PI / 2;
       var x = Math.cos(ang) * radius, y = Math.sin(ang) * radius;
       orb.style.width = orb.style.height = orbSize + "px";
       orb.style.left = "50%";
       orb.style.top = "50%";
       orb.style.transform = "translate(-50%,-50%) translate(" + x + "px," + y + "px)";
+      orb._base = orb.style.transform;
     });
   }
 
@@ -192,18 +199,75 @@
     });
   }
   function renderRotation() {
-    if (state.ringEl) state.ringEl.style.transform = "rotate(" + state.rotation + "rad)";
+    if (ringEl) ringEl.style.transform = "rotate(" + state.rotation + "rad)";
+    state.orbEls.forEach(function (orb) {
+      orb.style.transform = (orb._base || "") + " rotate(" + (-state.rotation) + "rad)";
+    });
   }
-  function setCenter(txt) { if (centerEl) centerEl.textContent = txt || ""; }
 
-  // ---- playing ----
+  var centerFadeTimer = null;
+  var centerFadeRAF = null;
+  function setCenter(txt) {
+    if (!centerEl) return;
+    if (txt) {
+      // New note: cancel any fade, show instantly at full brightness
+      if (centerFadeTimer) { clearTimeout(centerFadeTimer); centerFadeTimer = null; }
+      if (centerFadeRAF) { cancelAnimationFrame(centerFadeRAF); centerFadeRAF = null; }
+      centerEl.textContent = txt;
+      centerEl.style.opacity = "1";
+    } else {
+      // Start fade sequence: wait 3s, then fade out over 1.2s
+      if (centerFadeTimer) clearTimeout(centerFadeTimer);
+      centerFadeTimer = setTimeout(function () {
+        var start = performance.now();
+        var dur = 1200;
+        function step(now) {
+          var k = Math.min(1, (now - start) / dur);
+          centerEl.style.opacity = String(1 - k);
+          if (k < 1) centerFadeRAF = requestAnimationFrame(step);
+          else { centerEl.style.opacity = "0"; centerFadeRAF = null; }
+        }
+        centerFadeRAF = requestAnimationFrame(step);
+        centerFadeTimer = null;
+      }, 3000);
+    }
+  }
+
+  // ---- playing (orb click = note) ----
   function playOrb(pos, pointerId) {
     if (!state.orbActive[pos]) return;
     var note = CHROMA[pos];
     var baseMidi = 60 + SEMI[note];
-    var midi = pickOctave(baseMidi, state.lastPitch);
+    var semitone = SEMI[note];
+    // Detect direction from the last two taps so octave stepping works
+    // when tapping (not just glissando).
+    var prevSemitone = state.lastSemitone;
+    if (state.lastSemitone !== null) {
+      var diff = semitone - state.lastSemitone;
+      // Wrap-around: C(0) after B(11) = climbing, B(11) after C(0) = descending
+      if (diff > 6) diff -= 12;
+      else if (diff < -6) diff += 12;
+      if (diff !== 0) state.pitchDir = diff > 0 ? 1 : -1;
+    }
+    state.lastSemitone = semitone;
+    var midi;
+    if (prevSemitone !== null && semitone === prevSemitone && state.lastPitch !== null) {
+      // Same note repeated: reuse the exact same midi pitch so it doesn't
+      // shift octave on repeated taps.
+      midi = state.lastPitch;
+    } else {
+      midi = pickOctave(baseMidi, state.lastPitch);
+    }
     state.lastPitch = midi;
     playPluck(midiToFreq(midi));
+    // Glissando: remove lit from the previous orb for this pointer so the
+    // light doesn't linger — only the currently touched orb is lit.
+    var prevPos = state.held[pointerId];
+    if (prevPos !== undefined && prevPos !== pos) {
+      var stillHeld = false;
+      for (var k in state.held) { if (k !== String(pointerId) && state.held[k] === prevPos) { stillHeld = true; break; } }
+      if (!stillHeld) state.orbEls[prevPos].classList.remove("lit");
+    }
     state.held[pointerId] = pos;
     state.orbEls[pos].classList.add("lit");
     setCenter(note);
@@ -217,7 +281,10 @@
       if (!still) state.orbEls[pos].classList.remove("lit");
     }
     if (Object.keys(state.held).length === 0) {
-      state.lastPitch = null;
+      // Don't reset lastPitch/lastSemitone — keep them persistent so the
+      // next tap can continue the octave stepping from where we left off
+      // (same continuity as glissando, just with the finger lifted).
+      // Fade the centre letter out gradually after the last note releases
       setCenter("");
     }
   }
@@ -239,7 +306,7 @@
   function snapTween(target) {
     var start = state.rotation;
     var delta = target - start;
-    delta = Math.atan2(Math.sin(delta), Math.cos(delta)); // shortest path
+    delta = Math.atan2(Math.sin(delta), Math.cos(delta));
     var t0 = performance.now();
     function step(now) {
       var k = Math.min(1, (now - t0) / SNAP_MS);
@@ -257,7 +324,6 @@
     requestAnimationFrame(step);
   }
   function inertia() {
-    if (!state.dragging) return;
     var now = performance.now();
     var dt = Math.max(8, now - state.lastMoveTime);
     state.lastMoveTime = now;
@@ -268,15 +334,17 @@
     else { state.dragging = false; snapTween(nearestDetentRot()); }
   }
 
-  // ---- pointer handling (mouse + touch + pen) ----
+  // ---- pointer handling ----
   function onDown(e) {
     if (!wheelEl) return;
     ensureCtx();
     var orb = e.target.closest ? e.target.closest(".scales-orb") : null;
     if (orb) {
+      // Clicked an orb -> play that note, NOT rotate.
       state.mode = "play";
       playOrb(+orb.dataset.pos, e.pointerId);
     } else {
+      // Clicked the ring (or anywhere else on the wheel) -> drag to rotate.
       state.mode = "rotate";
       if (!state.followChords) {
         state.dragging = true;
@@ -290,9 +358,9 @@
   function onMove(e) {
     if (state.mode === "play") {
       var el = document.elementFromPoint(e.clientX, e.clientY);
-      var orb = el && el.closest ? el.closest(".scales-orb") : null;
-      if (orb) {
-        var pos = +orb.dataset.pos;
+      var o = el && el.closest ? el.closest(".scales-orb") : null;
+      if (o) {
+        var pos = +o.dataset.pos;
         if (state.held[e.pointerId] !== pos) playOrb(pos, e.pointerId);
       }
     } else if (state.mode === "rotate" && state.dragging && !state.followChords) {
@@ -308,6 +376,7 @@
       if (state.velocity < -INERTIA_MAXVEL) state.velocity = -INERTIA_MAXVEL;
       state.lastMoveTime = now;
       renderRotation();
+      
     }
     e.preventDefault();
   }
@@ -316,7 +385,8 @@
       stopOrb(e.pointerId);
     } else if (state.mode === "rotate") {
       if (state.dragging) {
-        state.dragging = false;
+        // Don't set dragging=false here — inertia() needs it true to run.
+        // inertia() will set it false when it finishes.
         if (Math.abs(state.velocity) > INERTIA_START) requestAnimationFrame(inertia);
         else snapTween(nearestDetentRot());
       }
@@ -325,7 +395,7 @@
     e.preventDefault();
   }
 
-  // ---- public API (used by app.js for follow-chords) ----
+  // ---- public API ----
   function setScale(name) {
     if (!SCALES[name]) return;
     state.scaleName = name;
@@ -341,15 +411,20 @@
     state.tonic = idx;
     state.rotation = -(idx / 12) * 2 * Math.PI;
     renderRotation();
+    // Reset pitch tracking so octave stepping starts fresh from the new root
+    // (otherwise the new key's root would jump at the old C-based pitch).
+    state.lastPitch = null;
+    state.lastSemitone = null;
+    state.pitchDir = 0;
     computeOrbActive();
     renderWheel();
   }
   function setFollow(on) {
     state.followChords = !!on;
     if (on) {
-      // lock to current tonic immediately
       state.rotation = -(state.tonic / 12) * 2 * Math.PI;
       renderRotation();
+      
     }
   }
 
@@ -359,7 +434,7 @@
     setFollow: setFollow
   };
 
-  // ---- panels (Scale picker + Settings) ----
+  // ---- panels ----
   function buildScalePanel() {
     var panel = document.getElementById("scalePanel");
     if (!panel) return;
@@ -383,7 +458,6 @@
     var scalePanel = document.getElementById("scalePanel");
     var settingsPanel = document.getElementById("settingsPanel");
     var follow = document.getElementById("followChordsToggle");
-
     if (scaleBtn && scalePanel) scaleBtn.addEventListener("click", function (e) {
       e.stopPropagation();
       settingsPanel && settingsPanel.classList.remove("open");
@@ -394,22 +468,18 @@
       scalePanel && scalePanel.classList.remove("open");
       settingsPanel.classList.toggle("open");
     });
-    // click outside closes panels
     document.addEventListener("click", function (e) {
       if (scalePanel && !scalePanel.contains(e.target) && e.target !== scaleBtn) scalePanel.classList.remove("open");
       if (settingsPanel && !settingsPanel.contains(e.target) && e.target !== settingsBtn) settingsPanel.classList.remove("open");
     });
-    if (follow) follow.addEventListener("change", function () {
-      setFollow(follow.checked);
-    });
+    if (follow) follow.addEventListener("change", function () { setFollow(follow.checked); });
     buildScalePanel();
   }
 
-  // ---- attach pointer interaction to the wheel ----
+  // ---- wire wheel pointer events ----
   function wireWheel() {
     if (!wheelEl) return;
     wheelEl.addEventListener("pointerdown", onDown);
-    // move/up are on window so a drag slipped off the wheel still tracks
     window.addEventListener("pointermove", onMove);
     window.addEventListener("pointerup", onUp);
     window.addEventListener("pointercancel", onUp);
