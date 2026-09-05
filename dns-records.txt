@@ -1,0 +1,11 @@
+; Unlimit Music — Cloudflare DNS import (BIND zone format)
+; Import at: Cloudflare Dashboard -> DNS -> "Import and Export" tab -> paste/upload this.
+; These 4 A records point the apex domain (unlimitmusic.com) at GitHub Pages.
+; The CNAME below makes www.unlimitmusic.com also work.
+; TTL 300 = 5 minutes. Proxy (orange cloud) is OFF by default here (recommended until HTTPS cert issues).
+
+unlimitmusic.com.          300    IN    A    185.199.108.153
+unlimitmusic.com.          300    IN    A    185.199.109.153
+unlimitmusic.com.          300    IN    A    185.199.110.153
+unlimitmusic.com.          300    IN    A    185.199.111.153
+www.unlimitmusic.com.      300    IN    CNAME    gregdavies91.github.io.
