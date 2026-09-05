@@ -2,7 +2,7 @@
 window.SITE_CONFIG = {
   // Your Google AdSense publisher ID, e.g. "ca-pub-1234567890123456".
   // Get this from AdSense after approval: Account > Sites > your site > Ad unit code.
-  ADSENSE_PUB_ID: "ca-pub-REPLACE_WITH_YOUR_ID",
+  ADSENSE_PUB_ID: "ca-pub-1921965753258324",
 
   // Optional: a specific display ad unit slot ID from your AdSense ad unit,
   // e.g. "1234567890". If left as-is, the site uses AdSense AUTO ADS

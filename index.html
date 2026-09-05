@@ -4,8 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Free Guitar Chords &amp; Root Notes — Play &amp; Learn</title>
-  <meta name="description" content="Tap a root note to hear it, then tap a chord to hear and see how to play it on guitar. Free guitar chord charts and audio for every key." />
-  <link rel="stylesheet" href="style.css" />
+  <meta name="description" content="Tap a root note to hear it, then tap a chord to hear and see how to play it on guitar. Free guitar chord charts, audio, and a chromatic scales wheel for songwriters." />
+  <link rel="stylesheet" href="style.css?v=2" />
   <link rel="icon" href="favicon.ico" />
   <meta name="google-adsense-account" content="ca-pub-1921965753258324" />
 
@@ -35,16 +35,45 @@
       <div id="rootRow" class="root-col"></div>
     </nav>
 
-    <!-- right: diagram stage (top) + chord grid (below) -->
+    <!-- right: top bar + middle row (diagrams | scales wheel) + chord grid -->
     <main class="stage">
-      <!-- ad slot at the very top of the stage -->
-      <div id="ad-slot" class="ad-slot" aria-label="Advertisement"></div>
+      <!-- top bar: Settings (left) · ad (centre) · Scale (right) -->
+      <header class="topbar">
+        <button id="settingsBtn" class="topbtn" aria-haspopup="true">Settings</button>
+        <div id="ad-slot" class="ad-slot" aria-label="Advertisement"></div>
+        <button id="scaleBtn" class="topbtn" aria-haspopup="true">Scale</button>
 
-      <section class="diagram-box" aria-label="Chord diagram">
-        <div class="diagram-stage">
-          <img id="diagramImg" alt="Guitar chord diagram" />
+        <!-- Scale picker popover (top-right, below the bar) -->
+        <div id="scalePanel" class="panel" role="menu" aria-label="Choose a scale"></div>
+
+        <!-- Settings popover (top-left, below the bar) -->
+        <div id="settingsPanel" class="panel" role="dialog" aria-label="Settings">
+          <label class="setting-row">
+            <input type="checkbox" id="followChordsToggle" />
+            <span>Scales wheel follows the chord root</span>
+          </label>
+          <p class="setting-note">Off by default. When on, the wheel's top note
+            tracks the root you pick on the left and you can't spin it manually.</p>
         </div>
-      </section>
+      </header>
+
+      <!-- middle: guitar diagram (+ future piano slot) on the left, wheel on the right -->
+      <div class="stage-mid">
+        <section class="diagrams">
+          <div class="diagram-box" aria-label="Chord diagram">
+            <div class="diagram-stage">
+              <img id="diagramImg" alt="Guitar chord diagram" />
+            </div>
+          </div>
+          <!-- FUTURE: piano chord diagram toggled from Settings. Space reserved. -->
+          <div class="piano-slot" aria-hidden="true"></div>
+        </section>
+
+        <section class="scales-box" aria-label="Scales wheel">
+          <div id="scalesWheel" class="scales-wheel"></div>
+          <div id="scalesCaption" class="scales-caption">Chromatic</div>
+        </section>
+      </div>
 
       <section class="chords" aria-label="Chords in this key">
         <div id="chordRow" class="chord-grid"></div>
@@ -66,14 +95,23 @@
   </div>
 
   <footer class="site-footer">
-    <a href="privacy.html">Privacy Policy</a>
+    <a href="chords.html">Chords</a>
+    <span aria-hidden="true">·</span>
+    <a href="scales.html">Scales</a>
+    <span aria-hidden="true">·</span>
+    <a href="theory.html">Theory</a>
+    <span aria-hidden="true">·</span>
+    <a href="learn.html">Learn</a>
+    <span aria-hidden="true">·</span>
+    <a href="privacy.html">Privacy</a>
     <span aria-hidden="true">·</span>
     <a href="https://www.google.com/settings/ads" rel="noopener" target="_blank">Ad Settings</a>
   </footer>
 
-  <script src="config.js"></script>
-  <script src="data.js"></script>
-  <script src="app.js"></script>
-  <script src="consent-ads.js"></script>
+  <script src="config.js?v=2"></script>
+  <script src="data.js?v=2"></script>
+  <script src="scales.js?v=2"></script>
+  <script src="app.js?v=2"></script>
+  <script src="consent-ads.js?v=2"></script>
 </body>
 </html>
