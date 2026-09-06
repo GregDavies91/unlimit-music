@@ -143,11 +143,10 @@
           chordRow.appendChild(btn);
         })(chords[i]);
       } else {
-        // placeholder button: shows "?", pops a "coming soon" toast
+        // placeholder button: no action, just a visual spacer
         var sp = document.createElement("button");
         sp.className = "spacer";
         sp.textContent = "?";
-        sp.addEventListener("click", function () { showToast("More features coming soon"); });
         chordRow.appendChild(sp);
       }
     }

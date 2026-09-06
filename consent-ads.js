@@ -1,7 +1,8 @@
 // Ad rendering — consent is now handled by Google's CERTIFIED CMP (Funding Choices)
 // plus Consent Mode v2 (see the inline scripts in index.html). No homemade
 // consent gate here: the CMP sets the consent signal, AdSense respects it.
-// This file only renders the ad unit once AdSense is approved.
+// This file only renders a SPECIFIC ad unit once you configure a real slot.
+// Otherwise Auto Ads handles everything (Google injects ads itself after consent).
 (function () {
   "use strict";
 
@@ -11,9 +12,8 @@
   var slot = document.getElementById("ad-slot");
 
   if (!slot) return;
-  if (PUB.indexOf("REPLACE") !== -1 || SLOT.indexOf("REPLACE") === -1) {
-    // Only render a manual unit if a real SLOT is configured.
-    // Otherwise fall back to Auto Ads (Google injects ads itself after consent).
+  // If either value is still a placeholder, skip the manual unit — Auto Ads handles it.
+  if (PUB.indexOf("REPLACE") !== -1 || SLOT.indexOf("REPLACE") !== -1) {
     return;
   }
 
