@@ -440,7 +440,6 @@ button.chord-btn.root.active {
 }
 
 /* ---- ad slot (defined space so layout never jumps) ---- */
-/* ---- ad slot (defined space so layout never jumps) ---- */
 .ad-placeholder {
   color: var(--muted);
   font-size: .8rem;
@@ -503,7 +502,8 @@ button.chord-btn.root.active {
 .site-footer a { color: var(--muted); text-decoration: none; }
 .site-footer a:hover { color: var(--neon); }
 
-/* ---- standalone legal / privacy page ---- */
+/* Standalone pages (About, Privacy, etc.) — allow scrolling */
+body.standalone { overflow: auto; }
 .legal {
   max-width: 720px;
   margin: 6vh auto;
