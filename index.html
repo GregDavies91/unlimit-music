@@ -40,7 +40,9 @@
       <!-- top bar: Settings (left) · ad (centre) · Scale (right) -->
       <header class="topbar">
         <button id="settingsBtn" class="topbtn" aria-haspopup="true">Settings</button>
-        <div id="ad-slot" class="ad-slot" aria-label="Advertisement"></div>
+        <div id="ad-slot" class="ad-slot" aria-label="Advertisement">
+          <span class="ad-placeholder">Advertisement</span>
+        </div>
         <button id="scaleBtn" class="topbtn" aria-haspopup="true">Scale</button>
 
         <!-- Scale picker popover (top-right, below the bar) -->
@@ -54,6 +56,9 @@
           </label>
           <p class="setting-note">Off by default. When on, the wheel's top note
             tracks the root you pick on the left and you can't spin it manually.</p>
+          <hr style="border-color: var(--line); margin: .6rem 0;" />
+          <a href="about.html" class="panel-item" style="display:block; text-decoration:none;">About &amp; Contact</a>
+          <a href="privacy.html" class="panel-item" style="display:block; text-decoration:none;">Privacy Policy</a>
         </div>
       </header>
 
@@ -94,19 +99,7 @@
     </div>
   </div>
 
-  <footer class="site-footer">
-    <a href="chords.html">Chords</a>
-    <span aria-hidden="true">·</span>
-    <a href="scales.html">Scales</a>
-    <span aria-hidden="true">·</span>
-    <a href="theory.html">Theory</a>
-    <span aria-hidden="true">·</span>
-    <a href="learn.html">Learn</a>
-    <span aria-hidden="true">·</span>
-    <a href="privacy.html">Privacy</a>
-    <span aria-hidden="true">·</span>
-    <a href="https://www.google.com/settings/ads" rel="noopener" target="_blank">Ad Settings</a>
-  </footer>
+  <!-- Footer removed: links now live in Settings panel so they're reachable. -->
 
   <script src="config.js?v=2"></script>
   <script src="data.js?v=2"></script>
