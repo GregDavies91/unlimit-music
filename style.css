@@ -17,9 +17,56 @@ body {
     repeating-linear-gradient(0deg, rgba(54,224,255,.025) 0 2px, transparent 2px 4px); /* lofi scanline */
   color: var(--text);
   line-height: 1.35;
-  overflow: hidden;
+  overflow: auto;
   letter-spacing: .02em;
 }
+
+/* ---- site header (visible text for Google) ---- */
+.site-header {
+  padding: 1.2rem 1.5rem .8rem;
+  text-align: center;
+  border-bottom: 1px solid var(--line);
+  background: linear-gradient(180deg, rgba(54,224,255,.04), transparent);
+}
+.site-brand {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .6rem;
+  flex-wrap: wrap;
+}
+.site-logo { font-size: 1.6rem; }
+.site-header h1 {
+  font-size: clamp(1.1rem, 2.2vw, 1.6rem);
+  color: var(--text);
+  margin: 0;
+  letter-spacing: .01em;
+}
+.site-tagline {
+  margin: .4rem auto 0;
+  max-width: 600px;
+  color: var(--muted);
+  font-size: clamp(.8rem, 1.2vw, .95rem);
+  line-height: 1.45;
+}
+
+/* ---- site footer (privacy + ad settings links) ---- */
+.site-footer {
+  padding: 1.2rem 1rem 2rem;
+  text-align: center;
+  border-top: 1px solid var(--line);
+  background: linear-gradient(0deg, rgba(54,224,255,.03), transparent);
+}
+.site-footer nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: .5rem 1.2rem;
+  margin-bottom: .8rem;
+}
+.site-footer a { color: var(--muted); text-decoration: none; font-size: .85rem; }
+.site-footer a:hover { color: var(--neon); }
+.site-copy { color: var(--muted); font-size: .75rem; margin: 0; }
 
 /* ---- overall frame: a bordered console ---- */
 .app {
@@ -489,18 +536,7 @@ button.chord-btn.root.active {
 .consent-reject { background: transparent; color: var(--muted); border: 1px solid var(--line); }
 .consent-accept:hover { filter: brightness(1.1); }
 
-/* ---- site footer (privacy + ad settings links) ---- */
-.site-footer {
-  display: flex;
-  align-items: center;
-  gap: .6rem;
-  justify-content: center;
-  padding: 1.2rem 1rem 2rem;
-  font-size: .8rem;
-  color: var(--muted);
-}
-.site-footer a { color: var(--muted); text-decoration: none; }
-.site-footer a:hover { color: var(--neon); }
+
 
 /* Standalone pages (About, Privacy, etc.) — allow scrolling */
 body.standalone { overflow: auto; }
