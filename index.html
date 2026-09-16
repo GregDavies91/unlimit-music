@@ -27,8 +27,25 @@
   <script async src="https://fundingchoicesmessages.google.com/i/ca-pub-1921965753258324?ship=0"></script>
   <!-- AdSense loader. Gated by Consent Mode — no ad cookies until consent is set. -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1921965753258324" crossorigin="anonymous"></script>
+
+  <!-- Structured data: invisible to users, readable by Google -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Unlimit Music",
+    "description": "Free guitar chord and scale player for songwriters. Tap a root note to hear it, tap a chord to see the guitar diagram and hear how it's played. Explore scales, chord theory, and music theory.",
+    "url": "https://unlimitmusic.com",
+    "applicationCategory": "EducationalApplication",
+    "operatingSystem": "Web",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "GBP" }
+  }
+  </script>
 </head>
 <body>
+  <!-- Visually hidden H1 for crawlers/screen readers -->
+  <h1 class="sr-only">Unlimit Music — Free Guitar Chords &amp; Scales for Songwriters</h1>
+
   <div class="app">
     <!-- left fixed rainbow root column -->
     <nav class="roots" aria-label="Root notes">
@@ -99,7 +116,47 @@
     </div>
   </div>
 
-  <!-- Footer removed: links now live in Settings panel so they're reachable. -->
+  <!-- Below-the-fold content: only visible when user scrolls down.
+       Google sees it; users see the app first. -->
+  <section class="below-fold">
+    <h2>Free Guitar Chords &amp; Scales for Songwriters</h2>
+    <p>Unlimit Music is a free web app that helps you explore chord and melody music theory.
+    Tap a root note on the left to hear it, tap any chord to see the guitar diagram and hear
+    how it's played. Use the chromatic scales wheel to find melodies that fit your progression.</p>
+
+    <h3>How to use it</h3>
+    <ol>
+      <li><strong>Pick a key</strong> — tap a root note (C through B) on the rainbow column on the left.</li>
+      <li><strong>Browse chords</strong> — the grid fills with every chord in that key. Tap any chord to hear it and see the diagram.</li>
+      <li><strong>Build a progression</strong> — try I–V–vi–IV (e.g. C–G–Am–F) and listen to how they fit together.</li>
+      <li><strong>Find a melody</strong> — use the scales wheel on the right. Drag the ring to rotate through keys. Tap any orb to hear the note.</li>
+      <li><strong>Explore scales</strong> — tap "Scale" in the top bar to switch between major, minor, pentatonic, blues, modes, and more.</li>
+    </ol>
+
+    <h3>More to explore on this site</h3>
+    <ul class="sitelinks">
+      <li><a href="chords.html">Chord Library</a> — every chord type explained: major, minor, 7th, suspended, extended, altered</li>
+      <li><a href="scales.html">Scales Guide</a> — major, minor, pentatonic, blues, modes, and how to use the wheel</li>
+      <li><a href="theory.html">Music Theory Basics</a> — keys, the circle of fifths, chord progressions, Roman numerals</li>
+      <li><a href="learn.html">Chord Theory</a> — how chords are built from intervals: triads, 7ths, sus, add, altered</li>
+      <li><a href="about.html">About &amp; Contact</a> — who runs this site, why it's free, and how to get in touch</li>
+      <li><a href="privacy.html">Privacy Policy</a> — cookies, advertising, and your rights</li>
+    </ul>
+  </section>
+
+  <!-- Footer navigation — Google needs to crawl to these pages -->
+  <footer class="site-footer">
+    <nav aria-label="Main pages">
+      <a href="index.html">Chord Player</a>
+      <a href="chords.html">Chord Library</a>
+      <a href="scales.html">Scales</a>
+      <a href="theory.html">Music Theory</a>
+      <a href="learn.html">Chord Theory</a>
+      <a href="about.html">About &amp; Contact</a>
+      <a href="privacy.html">Privacy Policy</a>
+    </nav>
+    <p class="site-copy">&copy; 2026 Unlimit Music. Free for all songwriters.</p>
+  </footer>
 
   <script src="config.js?v=2"></script>
   <script src="data.js?v=2"></script>
