@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>P2P World</title>
+    <style>*{box-sizing:border-box;margin:0;padding:0}body{background:#1a1a2e;font-family:system-ui,sans-serif;overflow:hidden}#app{width:100vw;height:100vh}canvas{display:block}#hud{color:#fff;pointer-events:none;text-shadow:0 1px 3px #000c;font-size:14px;transition:opacity .3s;position:fixed;top:16px;left:16px}#hud.hidden{opacity:0}#hud .peers{margin-top:8px}#hud .peer{opacity:.7}#hud .controls{opacity:.6;margin-top:8px;font-size:12px}#hud .controls kbd{background:#ffffff26;border-radius:3px;padding:1px 5px;font-family:ui-monospace,monospace;font-size:11px;display:inline-block}#minimap{background:#00000080;border:1px solid #ffffff26;border-radius:8px;width:150px;height:150px;margin-top:10px}#mic-indicator{background:#4ade80;border-radius:50%;width:12px;height:12px;transition:opacity .2s;position:fixed;top:16px;right:16px;box-shadow:0 0 8px #4ade80}#mic-indicator.muted{background:#ef4444;box-shadow:0 0 8px #ef4444}#controls-help{color:#ffffff80;pointer-events:none;font-size:12px;position:fixed;bottom:16px;left:16px}#join-modal{z-index:100;background:#000000d9;justify-content:center;align-items:center;display:flex;position:fixed;inset:0}#join-modal .card{background:#16213e;border-radius:12px;width:360px;padding:32px;box-shadow:0 20px 60px #00000080}#join-modal h2{color:#fff;margin-bottom:16px}#join-modal label{color:#ffffffb3;margin-bottom:4px;font-size:13px;display:block}#join-modal input{color:#fff;background:#0000004d;border:1px solid #ffffff1a;border-radius:8px;outline:none;width:100%;margin-bottom:16px;padding:10px 14px;font-size:14px}#join-modal input:focus{border-color:#6366f1}#join-modal button{color:#fff;cursor:pointer;background:#6366f1;border:none;border-radius:8px;width:100%;padding:12px;font-size:15px;font-weight:600;transition:background .2s}#join-modal button:hover{background:#4f46e5}#join-modal .hint{color:#fff6;text-align:center;margin-top:12px;font-size:12px}#chat-container{z-index:50;width:420px;max-width:90vw;position:fixed;bottom:16px;left:50%;transform:translate(-50%)}#chat-history{pointer-events:none;flex-direction:column;gap:2px;max-height:200px;margin-bottom:8px;display:flex;overflow-y:auto}#chat-history .chat-msg{color:#fff;text-shadow:0 1px 2px #000c;background:#00000080;border-radius:4px;align-self:flex-start;max-width:80%;padding:2px 8px;font-size:13px;animation:15s forwards chatFade}#chat-history .chat-msg .sender{color:#a5b4fc;margin-right:6px;font-weight:600}@keyframes chatFade{0%,70%{opacity:1}to{opacity:0}}#chat-input-wrap{display:none}#chat-input{color:#fff;background:#000000b3;border:1px solid #6366f180;border-radius:8px;outline:none;width:100%;padding:10px 14px;font-family:system-ui,sans-serif;font-size:14px}#chat-input:focus{border-color:#6366f1}#chat-hint{color:#fff6;pointer-events:none;font-size:12px;position:fixed;bottom:16px;right:16px}#hud-hint{color:#fff6;pointer-events:none;font-size:12px;position:fixed;top:16px;left:16px}#hud-hint kbd{background:#ffffff26;border-radius:3px;padding:1px 5px;font-family:ui-monospace,monospace;font-size:11px;display:inline-block}</style>
+    <script type="module" crossorigin src="./assets/index-B_vlVThM.js"></script>
+  </head>
+  <body>
+    <div id="app"></div>
+    
+    <div id="hud">
+      <div id="room-display">Not connected</div>
+      <div class="peers" id="peers-list"></div>
+      <div class="controls">
+        <kbd>WASD</kbd> move · <kbd>Mouse</kbd> look · <kbd>T</kbd> chat · <kbd>M</kbd> mute · <kbd>I</kbd> place object · <kbd>H</kbd> HUD
+      </div>
+      <canvas id="minimap" width="150" height="150"></canvas>
+    </div>
+    
+    <div id="hud-hint" style="display: none;">Press <kbd>H</kbd> for HUD</div>
+    
+    <div id="mic-indicator" class="muted"></div>
+    
+    <div id="chat-container">
+      <div id="chat-history"></div>
+      <div id="chat-input-wrap">
+        <input id="chat-input" type="text" placeholder="Type a message..." maxlength="200" autocomplete="off" />
+      </div>
+    </div>
+    
+    <div id="chat-hint">Press T to chat · I to place object</div>
+    
+
+    
+    <div id="join-modal">
+      <div class="card">
+        <h2>Join World</h2>
+        <label for="room-input">Room ID</label>
+        <input id="room-input" type="text" placeholder="e.g. my-room-123" value="gregs-world" />
+        <label for="password-input">Room Password (optional)</label>
+        <input id="password-input" type="password" placeholder="Leave blank for open room" />
+        <label for="name-input">Your Name</label>
+        <input id="name-input" type="text" placeholder="Anonymous" value="Player" />
+        <button id="join-btn">Connect</button>
+        <div class="hint">Share the Room ID with friends to meet up</div>
+      </div>
+    </div>
+    
+  </body>
+</html>
