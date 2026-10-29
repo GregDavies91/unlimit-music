@@ -1,7 +1,7 @@
-<script setup>
-import HelloWorld from './components/HelloWorld.vue'
-</script>
-
 <template>
-  <HelloWorld />
+  <Chords />
 </template>
+
+<script setup>
+import Chords from './views/Chords.vue'
+</script>
