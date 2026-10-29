@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DNS Records — Unlimit Music</title>
+</head>
+<body style="font-family: monospace; padding: 2rem; background: #0d1018; color: #e8ecf4;">
+  <h1>Cloudflare DNS Records for unlimitmusic.com</h1>
+  <p>Add these in Cloudflare Dashboard → unlimitmusic.com → DNS → Records</p>
+  <p>Follow ImprovMX's setup wizard to get your exact values (they're unique to your account), then paste them in here:</p>
+
+  <h2>MX Records (receive email)</h2>
+  <table style="border-collapse: collapse; margin: 1rem 0;">
+    <tr><th style="text-align:left;padding:.5rem;border:1px solid #333;">Type</th><th style="text-align:left;padding:.5rem;border:1px solid #333;">Name</th><th style="text-align:left;padding:.5rem;border:1px solid #333;">Content</th><th style="text-align:left;padding:.5rem;border:1px solid #333;">Priority</th></tr>
+    <tr><td style="padding:.5rem;border:1px solid #333;">MX</td><td style="padding:.5rem;border:1px solid #333;">@</td><td style="padding:.5rem;border:1px solid #333;">[ImprovMX primary MX]</td><td style="padding:.5rem;border:1px solid #333;">10</td></tr>
+    <tr><td style="padding:.5rem;border:1px solid #333;">MX</td><td style="padding:.5rem;border:1px solid #333;">@</td><td style="padding:.5rem;border:1px solid #333;">[ImprovMX secondary MX]</td><td style="padding:.5rem;border:1px solid #333;">20</td></tr>
+  </table>
+
+  <h2>TXT Records (prevent spoofing)</h2>
+  <table>
+    <tr><th style="text-align:left;padding:.5rem;border:1px solid #333;">Type</th><th style="text-align:left;padding:.5rem;border:1px solid #333;">Name</th><th style="text-align:left;padding:.5rem;border:1px solid #333;">Content</th></tr>
+    <tr><td style="padding:.5rem;border:1px solid #333;">TXT</td><td style="padding:.5rem;border:1px solid #333;">@</td><td style="padding:.5rem;border:1px solid #333;">v=spf1 include:spf.improvmx.com ~all</td></tr>
+    <tr><td style="padding:.5rem;border:1px solid #333;">TXT</td><td style="padding:.5rem;border:1px solid #333;">_dmarc</td><td style="padding:.5rem;border:1px solid #333;">v=DMARC1; p=quarantine; sp=quarantine; rua=mailto:contact@unlimitmusic.com</td></tr>
+  </table>
+
+  <h2>DKIM (optional but recommended)</h2>
+  <p>ImprovMX provides a DKIM key in their dashboard → Domain → DKIM. Add as:</p>
+  <table>
+    <tr><td style="padding:.5rem;border:1px solid #333;">TXT</td><td style="padding:.5rem;border:1px solid #333;">[selector]._domainkey</td><td style="padding:.5rem;border:1px solid #333;">[ImprovMX gives you this]</td></tr>
+  </table>
+
+  <p><strong>After adding</strong>: go back to ImprovMX → verify domain. Then test by sending to contact@unlimitmusic.com.</p>
+</body>
+</html>

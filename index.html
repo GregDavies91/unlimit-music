@@ -3,165 +3,180 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Free Guitar Chords &amp; Root Notes — Play &amp; Learn</title>
-  <meta name="description" content="Tap a root note to hear it, then tap a chord to hear and see how to play it on guitar. Free guitar chord charts, audio, and a chromatic scales wheel for songwriters." />
-  <link rel="stylesheet" href="style.css?v=2" />
-  <link rel="icon" href="favicon.ico" />
-  <meta name="google-adsense-account" content="ca-pub-1921965753258324" />
-
-  <!-- Google Consent Mode v2: default DENIED for EU/GB/CH, granted elsewhere.
-       The certified CMP below updates this after the visitor decides. -->
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('consent', 'default', {
-      ad_storage: 'denied',
-      ad_user_data: 'denied',
-      ad_personalization: 'denied',
-      analytics_storage: 'denied',
-      region: ['EU', 'GB', 'CH']
-    });
-  </script>
-  <!-- Google-certified CMP (Funding Choices). IMPORTANT: enable the consent
-       message in AdSense -> Privacy & messaging first, otherwise this shows nothing. -->
-  <script async src="https://fundingchoicesmessages.google.com/i/ca-pub-1921965753258324?ship=0"></script>
-  <!-- AdSense loader. Gated by Consent Mode — no ad cookies until consent is set. -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1921965753258324" crossorigin="anonymous"></script>
-
-  <!-- Structured data: invisible to users, readable by Google -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebApplication",
-    "name": "Unlimit Music",
-    "description": "Free guitar chord and scale player for songwriters. Tap a root note to hear it, tap a chord to see the guitar diagram and hear how it's played. Explore scales, chord theory, and music theory.",
-    "url": "https://unlimitmusic.com",
-    "applicationCategory": "EducationalApplication",
-    "operatingSystem": "Web",
-    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "GBP" }
-  }
-  </script>
+  <title>Unlimit Music — Record Label</title>
+  <meta name="description" content="Unlimit Music — a record label. All sorts of different kinds of music." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    :root { --bg: #f8f7f4; --fg: #1a1a1a; --muted: #8a8a8a; --border: #e5e3df; --accent: #1a1a1a; --card-bg: #ffffff; --radius: 2px; --font-body: 'Inter', system-ui, sans-serif; --font-mono: 'Space Mono', monospace; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { font-size: 16px; }
+    body { font-family: var(--font-body); background: var(--bg); color: var(--fg); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+    header { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bottom: 1px solid var(--border); padding: 1.25rem 2rem; display: flex; align-items: center; justify-content: space-between; }
+    .logo { font-family: var(--font-mono); font-size: 1.1rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; text-decoration: none; color: var(--fg); }
+    nav { display: flex; gap: 2rem; align-items: center; }
+    nav a { font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; text-decoration: none; color: var(--muted); transition: color 0.2s; }
+    nav a:hover { color: var(--fg); }
+    nav a.active { color: var(--fg); }
+    .hero { padding: 6rem 2rem 4rem; max-width: 1200px; margin: 0 auto; }
+    .hero h1 { font-family: var(--font-mono); font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: 700; line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 1.5rem; }
+    .hero p { font-size: 1.1rem; color: var(--muted); max-width: 500px; line-height: 1.7; }
+    section { padding: 4rem 2rem; max-width: 1200px; margin: 0 auto; }
+    .section-header { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 2rem; border-bottom: 1px solid var(--border); padding-bottom: 1rem; }
+    .section-header h2 { font-family: var(--font-mono); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.15em; color: var(--muted); }
+    .section-header a { font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    .section-header a:hover { color: var(--fg); }
+    .artist-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 2rem; }
+    .artist-card { text-decoration: none; color: var(--fg); }
+    .artist-card .photo { aspect-ratio: 1; background: #e8e6e1; margin-bottom: 1rem; overflow: hidden; position: relative; }
+    .artist-card .photo img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
+    .artist-card:hover .photo img { transform: scale(1.03); }
+    .artist-card .name { font-family: var(--font-mono); font-size: 0.9rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 0.25rem; }
+    .artist-card .genre { font-size: 0.8rem; color: var(--muted); }
+    .release-list { display: flex; flex-direction: column; gap: 0; }
+    .release-item { display: grid; grid-template-columns: 80px 1fr auto; gap: 1.5rem; align-items: center; padding: 1.25rem 0; border-bottom: 1px solid var(--border); text-decoration: none; color: var(--fg); transition: background 0.2s; }
+    .release-item:hover { background: rgba(0,0,0,0.02); }
+    .release-item .cover { width: 80px; height: 80px; background: #e8e6e1; overflow: hidden; }
+    .release-item .cover img { width: 100%; height: 100%; object-fit: cover; }
+    .release-item .info h3 { font-size: 1rem; font-weight: 500; margin-bottom: 0.25rem; }
+    .release-item .info p { font-size: 0.8rem; color: var(--muted); }
+    .release-item .date { font-family: var(--font-mono); font-size: 0.75rem; color: var(--muted); text-align: right; }
+    .news-list { display: flex; flex-direction: column; gap: 0; }
+    .news-item { padding: 1.5rem 0; border-bottom: 1px solid var(--border); }
+    .news-item .date { font-family: var(--font-mono); font-size: 0.7rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.5rem; }
+    .news-item h3 { font-size: 1.1rem; font-weight: 500; margin-bottom: 0.5rem; }
+    .news-item h3 a { color: var(--fg); text-decoration: none; transition: opacity 0.2s; }
+    .news-item h3 a:hover { opacity: 0.7; }
+    .news-item p { font-size: 0.9rem; color: var(--muted); line-height: 1.6; }
+    footer { border-top: 1px solid var(--border); padding: 3rem 2rem; max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+    footer .copy { font-family: var(--font-mono); font-size: 0.7rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; }
+    footer .links { display: flex; gap: 1.5rem; }
+    footer .links a { font-family: var(--font-mono); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    footer .links a:hover { color: var(--fg); }
+    .tools-section { background: #f0efe9; padding: 3rem 2rem; }
+    .tools-section .inner { max-width: 1200px; margin: 0 auto; }
+    .tools-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1.5rem; margin-top: 1.5rem; }
+    .tool-card { background: var(--card-bg); padding: 1.5rem; text-decoration: none; color: var(--fg); border: 1px solid var(--border); transition: border-color 0.2s; }
+    .tool-card:hover { border-color: var(--fg); }
+    .tool-card .tool-name { font-family: var(--font-mono); font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem; }
+    .tool-card .tool-desc { font-size: 0.8rem; color: var(--muted); line-height: 1.5; }
+    @media (max-width: 768px) {
+      header { padding: 1rem 1.25rem; }
+      nav { gap: 1.25rem; }
+      .hero { padding: 4rem 1.25rem 3rem; }
+      section { padding: 3rem 1.25rem; }
+      .release-item { grid-template-columns: 60px 1fr; }
+      .release-item .date { display: none; }
+      .release-item .cover { width: 60px; height: 60px; }
+      footer { padding: 2rem 1.25rem; flex-direction: column; text-align: center; }
+    }
+  </style>
 </head>
 <body>
-  <!-- Visually hidden H1 for crawlers/screen readers -->
-  <h1 class="sr-only">Unlimit Music — Free Guitar Chords &amp; Scales for Songwriters</h1>
 
-  <div class="app">
-    <!-- left fixed rainbow root column -->
-    <nav class="roots" aria-label="Root notes">
-      <div id="rootRow" class="root-col"></div>
+  <header>
+    <a href="/" class="logo">Unlimit Music</a>
+    <nav>
+      <a href="/" class="active">Latest</a>
+      <a href="#artists">Artists</a>
+      <a href="#releases">Releases</a>
+      <a href="#news">News</a>
+      <a href="#tools">Tools</a>
+      <a href="#about">About</a>
     </nav>
+  </header>
 
-    <!-- right: top bar + middle row (diagrams | scales wheel) + chord grid -->
-    <main class="stage">
-      <!-- top bar: Settings (left) · ad (centre) · Scale (right) -->
-      <header class="topbar">
-        <button id="settingsBtn" class="topbtn" aria-haspopup="true">Settings</button>
-        <div id="ad-slot" class="ad-slot" aria-label="Advertisement">
-          <span class="ad-placeholder">Advertisement</span>
-        </div>
-        <button id="scaleBtn" class="topbtn" aria-haspopup="true">Scale</button>
-
-        <!-- Scale picker popover (top-right, below the bar) -->
-        <div id="scalePanel" class="panel" role="menu" aria-label="Choose a scale"></div>
-
-        <!-- Settings popover (top-left, below the bar) -->
-        <div id="settingsPanel" class="panel" role="dialog" aria-label="Settings">
-          <label class="setting-row">
-            <input type="checkbox" id="followChordsToggle" />
-            <span>Scales wheel follows the chord root</span>
-          </label>
-          <p class="setting-note">Off by default. When on, the wheel's top note
-            tracks the root you pick on the left and you can't spin it manually.</p>
-          <hr style="border-color: var(--line); margin: .6rem 0;" />
-          <a href="about.html" class="panel-item" style="display:block; text-decoration:none;">About &amp; Contact</a>
-          <a href="privacy.html" class="panel-item" style="display:block; text-decoration:none;">Privacy Policy</a>
-        </div>
-      </header>
-
-      <!-- middle: guitar diagram (+ future piano slot) on the left, wheel on the right -->
-      <div class="stage-mid">
-        <section class="diagrams">
-          <div class="diagram-box" aria-label="Chord diagram">
-            <div class="diagram-stage">
-              <img id="diagramImg" alt="Guitar chord diagram" />
-            </div>
-          </div>
-          <!-- FUTURE: piano chord diagram toggled from Settings. Space reserved. -->
-          <div class="piano-slot" aria-hidden="true"></div>
-        </section>
-
-        <section class="scales-box" aria-label="Scales wheel">
-          <div id="scalesWheel" class="scales-wheel"></div>
-          <div id="scalesCaption" class="scales-caption">Chromatic</div>
-        </section>
-      </div>
-
-      <section class="chords" aria-label="Chords in this key">
-        <div id="chordRow" class="chord-grid"></div>
-      </section>
-    </main>
+  <div class="hero">
+    <h1>Unlimit Music</h1>
+    <p>A record label. All sorts of different kinds of music.</p>
   </div>
 
-  <!-- popup toast for placeholder buttons -->
-  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <section id="artists">
+    <div class="section-header">
+      <h2>Artists</h2>
+      <a href="#artists">View all →</a>
+    </div>
+    <div class="artist-grid">
+      <a href="/smplstcscntsts" class="artist-card">
+        <div class="photo">
+          <img src="assets/artists/smplstcscntsts.jpg" alt="smplstcscntsts" />
+        </div>
+        <div class="name">smplstcscntsts</div>
+        <div class="genre">Ambient / Electronic / Experimental</div>
+      </a>
+    </div>
+  </section>
 
-  <!-- first-load instruction pointing at the root column (on the LEFT) -->
-  <div id="onboard" class="onboard">
-    <div class="onboard-arrow" aria-hidden="true">&#11013;</div>
-    <div class="onboard-card">
-      <h2>Start here</h2>
-      <p>Tap a <b>root note</b> on the left to hear it, then tap any chord to hear and see how to play it.</p>
-      <button id="onboardOk" class="onboard-ok">Got it</button>
+  <section id="releases">
+    <div class="section-header">
+      <h2>Featured Releases</h2>
+      <a href="#releases">View all →</a>
+    </div>
+    <div class="release-list">
+      <a href="/smplstcscntsts" class="release-item">
+        <div class="cover">
+          <img src="assets/releases/smplestcscntsts-debut.jpg" alt="Debut Release" />
+        </div>
+        <div class="info">
+          <h3>Debut Release</h3>
+          <p>smplstcscntsts</p>
+        </div>
+        <div class="date">2026</div>
+      </a>
+    </div>
+  </section>
+
+  <section id="news">
+    <div class="section-header">
+      <h2>News</h2>
+      <a href="#news">View all →</a>
+    </div>
+    <div class="news-list">
+      <div class="news-item">
+        <div class="date">October 2026</div>
+        <h3><a href="#">Welcome to Unlimit Music</a></h3>
+        <p>We're launching a new record label. All sorts of different kinds of music. First artist: smplstcscntsts.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="tools-section" id="tools">
+    <div class="inner">
+      <div class="section-header">
+        <h2>Tools</h2>
+      </div>
+      <div class="tools-grid">
+        <a href="/chords" class="tool-card">
+          <div class="tool-name">Unlimit Chords</div>
+          <div class="tool-desc">Chords, scales wheel, and songwriting tools for musicians.</div>
+        </a>
+        <a href="/studio" class="tool-card">
+          <div class="tool-name">Unlimit Studio</div>
+          <div class="tool-desc">3D world for music collaboration and exploration.</div>
+        </a>
+      </div>
     </div>
   </div>
 
-  <!-- Below-the-fold content: only visible when user scrolls down.
-       Google sees it; users see the app first. -->
-  <section class="below-fold">
-    <h2>Free Guitar Chords &amp; Scales for Songwriters</h2>
-    <p>Unlimit Music is a free web app that helps you explore chord and melody music theory.
-    Tap a root note on the left to hear it, tap any chord to see the guitar diagram and hear
-    how it's played. Use the chromatic scales wheel to find melodies that fit your progression.</p>
-
-    <h3>How to use it</h3>
-    <ol>
-      <li><strong>Pick a key</strong> — tap a root note (C through B) on the rainbow column on the left.</li>
-      <li><strong>Browse chords</strong> — the grid fills with every chord in that key. Tap any chord to hear it and see the diagram.</li>
-      <li><strong>Build a progression</strong> — try I–V–vi–IV (e.g. C–G–Am–F) and listen to how they fit together.</li>
-      <li><strong>Find a melody</strong> — use the scales wheel on the right. Drag the ring to rotate through keys. Tap any orb to hear the note.</li>
-      <li><strong>Explore scales</strong> — tap "Scale" in the top bar to switch between major, minor, pentatonic, blues, modes, and more.</li>
-    </ol>
-
-    <h3>More to explore on this site</h3>
-    <ul class="sitelinks">
-      <li><a href="chords.html">Chord Library</a> — every chord type explained: major, minor, 7th, suspended, extended, altered</li>
-      <li><a href="scales.html">Scales Guide</a> — major, minor, pentatonic, blues, modes, and how to use the wheel</li>
-      <li><a href="theory.html">Music Theory Basics</a> — keys, the circle of fifths, chord progressions, Roman numerals</li>
-      <li><a href="learn.html">Chord Theory</a> — how chords are built from intervals: triads, 7ths, sus, add, altered</li>
-      <li><a href="about.html">About &amp; Contact</a> — who runs this site, why it's free, and how to get in touch</li>
-      <li><a href="privacy.html">Privacy Policy</a> — cookies, advertising, and your rights</li>
-    </ul>
+  <section id="about">
+    <div class="section-header">
+      <h2>About</h2>
+    </div>
+    <p style="max-width: 600px; color: var(--muted); line-height: 1.8;">
+      Unlimit Music is a record label. We believe in music without boundaries — ambient, electronic, experimental, and everything in between. Our first artist is smplstcscntsts, and we're just getting started.
+    </p>
   </section>
 
-  <!-- Footer navigation — Google needs to crawl to these pages -->
-  <footer class="site-footer">
-    <nav aria-label="Main pages">
-      <a href="index.html">Chord Player</a>
-      <a href="chords.html">Chord Library</a>
-      <a href="scales.html">Scales</a>
-      <a href="theory.html">Music Theory</a>
-      <a href="learn.html">Chord Theory</a>
-      <a href="about.html">About &amp; Contact</a>
-      <a href="privacy.html">Privacy Policy</a>
-    </nav>
-    <p class="site-copy">&copy; 2026 Unlimit Music. Free for all songwriters.</p>
+  <footer>
+    <div class="copy">&copy; 2026 Unlimit Music</div>
+    <div class="links">
+      <a href="#">Instagram</a>
+      <a href="#">Bandcamp</a>
+      <a href="#">YouTube</a>
+      <a href="#">Newsletter</a>
+    </div>
   </footer>
 
-  <script src="config.js?v=2"></script>
-  <script src="data.js?v=2"></script>
-  <script src="scales.js?v=2"></script>
-  <script src="app.js?v=2"></script>
-  <script src="consent-ads.js?v=2"></script>
 </body>
 </html>

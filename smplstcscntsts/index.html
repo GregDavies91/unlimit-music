@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>smplstcscntsts — Unlimit Music</title>
+  <meta name="description" content="smplstcscntsts (Simplistic Scientists) — ambient, electronic, experimental music on Unlimit Music." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    :root { --bg: #f8f7f4; --fg: #1a1a1a; --muted: #8a8a8a; --border: #e5e3df; --accent: #1a1a1a; --card-bg: #ffffff; --font-body: 'Inter', system-ui, sans-serif; --font-mono: 'Space Mono', monospace; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { font-size: 16px; }
+    body { font-family: var(--font-body); background: var(--bg); color: var(--fg); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+    header { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bottom: 1px solid var(--border); padding: 1.25rem 2rem; display: flex; align-items: center; justify-content: space-between; }
+    .logo { font-family: var(--font-mono); font-size: 1.1rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; text-decoration: none; color: var(--fg); }
+    nav { display: flex; gap: 2rem; align-items: center; }
+    nav a { font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; text-decoration: none; color: var(--muted); transition: color 0.2s; }
+    nav a:hover { color: var(--fg); }
+    nav a.active { color: var(--fg); }
+    .artist-hero { padding: 4rem 2rem 2rem; max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 300px 1fr; gap: 3rem; align-items: start; }
+    .artist-hero .photo { aspect-ratio: 1; background: #e8e6e1; overflow: hidden; }
+    .artist-hero .photo img { width: 100%; height: 100%; object-fit: cover; }
+    .artist-hero .info h1 { font-family: var(--font-mono); font-size: clamp(1.8rem, 4vw, 3rem); font-weight: 700; letter-spacing: -0.02em; margin-bottom: 0.5rem; text-transform: uppercase; }
+    .artist-hero .info .genre { font-family: var(--font-mono); font-size: 0.8rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1.5rem; }
+    .artist-hero .info .bio { font-size: 1rem; color: var(--fg); line-height: 1.7; max-width: 600px; }
+    .artist-hero .info .bio p { margin-bottom: 1rem; }
+    .artist-hero .info .socials { display: flex; gap: 1.5rem; margin-top: 2rem; }
+    .artist-hero .info .socials a { font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    .artist-hero .info .socials a:hover { color: var(--fg); }
+    .section { padding: 3rem 2rem; max-width: 1200px; margin: 0 auto; }
+    .section-header { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 2rem; border-bottom: 1px solid var(--border); padding-bottom: 1rem; }
+    .section-header h2 { font-family: var(--font-mono); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.15em; color: var(--muted); }
+    .audio-player { background: var(--card-bg); border: 1px solid var(--border); padding: 1.5rem; margin-bottom: 2rem; }
+    .audio-player .track-name { font-family: var(--font-mono); font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.75rem; }
+    .audio-player audio { width: 100%; }
+    .release-list { display: flex; flex-direction: column; gap: 0; }
+    .release-item { display: grid; grid-template-columns: 80px 1fr auto; gap: 1.5rem; align-items: center; padding: 1.25rem 0; border-bottom: 1px solid var(--border); text-decoration: none; color: var(--fg); }
+    .release-item .cover { width: 80px; height: 80px; background: #e8e6e1; overflow: hidden; }
+    .release-item .cover img { width: 100%; height: 100%; object-fit: cover; }
+    .release-item .info h3 { font-size: 1rem; font-weight: 500; margin-bottom: 0.25rem; }
+    .release-item .info p { font-size: 0.8rem; color: var(--muted); }
+    .release-item .date { font-family: var(--font-mono); font-size: 0.75rem; color: var(--muted); text-align: right; }
+    .tools-links { display: flex; gap: 1.5rem; margin-top: 2rem; }
+    .tools-links a { font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    .tools-links a:hover { color: var(--fg); }
+    footer { border-top: 1px solid var(--border); padding: 3rem 2rem; max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+    footer .copy { font-family: var(--font-mono); font-size: 0.7rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; }
+    footer .links { display: flex; gap: 1.5rem; }
+    footer .links a { font-family: var(--font-mono); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    footer .links a:hover { color: var(--fg); }
+    @media (max-width: 768px) {
+      .artist-hero { grid-template-columns: 1fr; gap: 2rem; padding: 3rem 1.25rem 2rem; }
+      .artist-hero .photo { max-width: 240px; }
+      .release-item { grid-template-columns: 60px 1fr; }
+      .release-item .date { display: none; }
+      .release-item .cover { width: 60px; height: 60px; }
+      footer { padding: 2rem 1.25rem; flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <a href="/" class="logo">Unlimit Music</a>
+    <nav>
+      <a href="/">Label</a>
+      <a href="/smplstcscntsts" class="active">smplstcscntsts</a>
+      <a href="/chords">Unlimit Chords</a>
+      <a href="/studio">Unlimit Studio</a>
+    </nav>
+  </header>
+
+  <div class="artist-hero">
+    <div class="photo">
+      <img src="../assets/artists/smplstcscntsts.jpg" alt="smplstcscntsts" />
+    </div>
+    <div class="info">
+      <h1>smplstcscntsts</h1>
+      <div class="genre">Ambient / Electronic / Experimental</div>
+      <div class="bio">
+        <p>Simplistic Scientists — exploring the intersection of sound, space, and the metaverse. Creating ambient, electronic, and experimental music that pushes boundaries.</p>
+        <p>First artist on Unlimit Music. More to come.</p>
+      </div>
+      <div class="socials">
+        <a href="#">Bandcamp</a>
+        <a href="#">YouTube</a>
+        <a href="#">Instagram</a>
+        <a href="#">SoundCloud</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <h2>Listen</h2>
+    </div>
+    <div class="audio-player">
+      <div class="track-name">Debut Release — Preview</div>
+      <audio controls>
+        <source src="../assets/audio/smplstcscntsts-preview.mp3" type="audio/mpeg" />
+        Your browser does not support the audio element.
+      </audio>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <h2>Releases</h2>
+    </div>
+    <div class="release-list">
+      <a href="#" class="release-item">
+        <div class="cover">
+          <img src="../assets/releases/smplestcscntsts-debut.jpg" alt="Debut Release" />
+        </div>
+        <div class="info">
+          <h3>Debut Release</h3>
+          <p>smplstcscntsts</p>
+        </div>
+        <div class="date">2026</div>
+      </a>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <h2>Explore</h2>
+    </div>
+    <div class="tools-links">
+      <a href="/chords">Unlimit Chords →</a>
+      <a href="/studio">Unlimit Studio →</a>
+    </div>
+  </div>
+
+  <footer>
+    <div class="copy">&copy; 2026 Unlimit Music</div>
+    <div class="links">
+      <a href="/">Label</a>
+      <a href="/chords">Unlimit Chords</a>
+      <a href="/studio">Unlimit Studio</a>
+    </div>
+  </footer>
+
+</body>
+</html>
