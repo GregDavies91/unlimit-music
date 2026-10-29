@@ -8,6 +8,10 @@
           <p>Ambient / Electronic / Experimental. Exploring sound, space, and the metaverse.</p>
         </div>
       </router-link>
+      <div class="tools">
+        <router-link to="/chords">Unlimit Chords</router-link>
+        <router-link to="/studio">Unlimit Studio</router-link>
+      </div>
     </main>
     <footer class="foot">
       <span>info@unlimitmusic.com</span>
@@ -26,6 +30,9 @@
 .photo.placeholder { display: flex; align-items: center; justify-content: center; background: #f2f2f2; color: #aaa; font-family: monospace; font-size: 3rem; font-weight: 700; }
 .minibio h1 { font-family: monospace; font-size: 1.6rem; text-transform: uppercase; margin-bottom: .5rem; }
 .minibio p { color: #555; line-height: 1.5; }
+.tools { display: flex; gap: 2rem; margin-top: 1.5rem; justify-content: center; }
+.tools a { font-family: monospace; font-size: .75rem; text-transform: uppercase; letter-spacing: .1em; color: #888; text-decoration: none; }
+.tools a:hover { color: #000; }
 .foot { display: flex; justify-content: space-between; padding: 1rem 2rem; border-top: 1px solid #eee; font-size: .75rem; color: #888; font-family: monospace; }
 @media (max-width: 700px) { .card { grid-template-columns: 1fr; } .photo { width: 180px; height: 180px; } }
 </style>
