@@ -1,5 +1,8 @@
 <template>
   <div class="home">
+    <header class="topbar">
+      <img src="/logo.svg" alt="Unlimit Music" class="logo" />
+    </header>
     <main class="hero">
       <router-link to="/smplstcscntsts" class="card">
         <div class="photo placeholder">SS</div>
@@ -23,16 +26,18 @@
 <script setup></script>
 
 <style scoped>
-.home { height: 100vh; display: flex; flex-direction: column; background: #fff; color: #000; margin: 0; }
-.hero { flex: 1; display: flex; align-items: center; justify-content: center; padding: 2rem; }
+.home { height: 100vh; width: 100vw; display: flex; flex-direction: column; background: #fff; color: #000; margin: 0; overflow: hidden; }
+.topbar { display: flex; align-items: center; justify-content: center; padding: 1.25rem 2rem; background: #fff; }
+.logo { height: 32px; }
+.hero { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 2rem; gap: 2rem; }
 .card { display: grid; grid-template-columns: 260px 1fr; gap: 2rem; max-width: 720px; width: 100%; text-decoration: none; color: #000; align-items: center; }
 .photo { width: 260px; height: 260px; }
 .photo.placeholder { display: flex; align-items: center; justify-content: center; background: #f2f2f2; color: #aaa; font-family: monospace; font-size: 3rem; font-weight: 700; }
 .minibio h1 { font-family: monospace; font-size: 1.6rem; text-transform: uppercase; margin-bottom: .5rem; }
 .minibio p { color: #555; line-height: 1.5; }
-.tools { display: flex; gap: 2rem; margin-top: 1.5rem; justify-content: center; }
+.tools { display: flex; gap: 2rem; }
 .tools a { font-family: monospace; font-size: .75rem; text-transform: uppercase; letter-spacing: .1em; color: #888; text-decoration: none; }
 .tools a:hover { color: #000; }
-.foot { display: flex; justify-content: space-between; padding: 1rem 2rem; border-top: 1px solid #eee; font-size: .75rem; color: #888; font-family: monospace; }
+.foot { display: flex; justify-content: space-between; padding: 1rem 2rem; border-top: 1px solid #eee; font-size: .75rem; color: #888; font-family: monospace; background: #fff; }
 @media (max-width: 700px) { .card { grid-template-columns: 1fr; } .photo { width: 180px; height: 180px; } }
 </style>
