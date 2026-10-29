@@ -14,7 +14,7 @@
     </header>
     <main class="hero">
       <div class="artist">
-        <img src="https://unlimitmusic.com/assets/artists/smplstcscntsts.jpg" alt="smplstcscntsts" class="photo" />
+        <div class="photo placeholder">SS</div>
         <div class="info">
           <h1>smplstcscntsts</h1>
           <div class="genre">Ambient / Electronic / Experimental</div>
