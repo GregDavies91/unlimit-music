@@ -1,10 +1,7 @@
 <template>
   <div class="home">
     <header class="topbar">
-      <div class="brand">
-        <img src="/favicon.svg" alt="Unlimit Music" class="logo" />
-        <span class="name">UNLIMIT MUSIC</span>
-      </div>
+      <img src="/logo.svg" alt="Unlimit Music" class="logo" />
       <nav>
         <router-link to="/">Label</router-link>
         <router-link to="/smplstcscntsts">smplstcscntsts</router-link>
@@ -13,42 +10,36 @@
       </nav>
     </header>
     <main class="hero">
-      <div class="artist">
+      <router-link to="/smplstcscntsts" class="card">
         <div class="photo placeholder">SS</div>
-        <div class="info">
+        <div class="minibio">
           <h1>smplstcscntsts</h1>
-          <div class="genre">Ambient / Electronic / Experimental</div>
-          <p class="bio">Simplistic Scientists — exploring the intersection of sound, space, and the metaverse. Creating ambient, electronic, and experimental music that pushes boundaries. First artist on Unlimit Music.</p>
-          <div class="links">
-            <router-link to="/smplstcscntsts">Band page →</router-link>
-            <router-link to="/chords">Unlimit Chords →</router-link>
-            <router-link to="/studio">Unlimit Studio →</router-link>
-          </div>
+          <p>Ambient / Electronic / Experimental. Simplistic Scientists — exploring sound, space, and the metaverse.</p>
         </div>
-      </div>
+      </router-link>
     </main>
+    <footer class="foot">
+      <span>info@unlimitmusic.com</span>
+      <span>demos@unlimitmusic.com</span>
+    </footer>
   </div>
 </template>
 
 <script setup></script>
 
 <style scoped>
-.home { height: 100vh; display: flex; flex-direction: column; }
-.topbar { display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; border-bottom: 1px solid #e5e3df; }
-.brand { display: flex; align-items: center; gap: .75rem; }
-.logo { width: 28px; height: 28px; }
-.name { font-family: monospace; font-weight: 700; letter-spacing: .05em; }
+.home { height: 100vh; display: flex; flex-direction: column; background: #fff; color: #000; }
+.topbar { display: flex; justify-content: space-between; align-items: center; padding: 1.25rem 2rem; border-bottom: 1px solid #eee; }
+.logo { height: 28px; }
 nav { display: flex; gap: 1.5rem; }
-nav a { text-decoration: none; color: #8a8a8a; font-size: .8rem; text-transform: uppercase; letter-spacing: .1em; }
-nav a.router-link-active { color: #1a1a1a; }
+nav a { text-decoration: none; color: #000; font-size: .8rem; text-transform: uppercase; letter-spacing: .1em; opacity: .6; }
+nav a:hover, nav a.router-link-active { opacity: 1; }
 .hero { flex: 1; display: flex; align-items: center; justify-content: center; padding: 2rem; }
-.artist { display: grid; grid-template-columns: 220px 1fr; gap: 2rem; max-width: 900px; width: 100%; align-items: center; }
-.photo { width: 220px; height: 220px; object-fit: cover; border-radius: 2px; }
-.info h1 { font-family: monospace; font-size: 2rem; text-transform: uppercase; margin-bottom: .25rem; }
-.genre { font-family: monospace; font-size: .75rem; color: #8a8a8a; text-transform: uppercase; letter-spacing: .1em; margin-bottom: 1rem; }
-.bio { color: #444; line-height: 1.6; max-width: 520px; margin-bottom: 1.25rem; }
-.links { display: flex; gap: 1.25rem; flex-wrap: wrap; }
-.links a { font-family: monospace; font-size: .75rem; text-transform: uppercase; letter-spacing: .1em; color: #8a8a8a; text-decoration: none; }
-.links a:hover { color: #1a1a1a; }
-@media (max-width: 700px) { .artist { grid-template-columns: 1fr; } .photo { width: 160px; height: 160px; } }
+.card { display: grid; grid-template-columns: 260px 1fr; gap: 2rem; max-width: 720px; width: 100%; text-decoration: none; color: #000; align-items: center; }
+.photo { width: 260px; height: 260px; object-fit: cover; }
+.photo.placeholder { display: flex; align-items: center; justify-content: center; background: #f2f2f2; color: #aaa; font-family: monospace; font-size: 3rem; font-weight: 700; }
+.minibio h1 { font-family: monospace; font-size: 1.6rem; text-transform: uppercase; margin-bottom: .5rem; }
+.minibio p { color: #555; line-height: 1.5; }
+.foot { display: flex; justify-content: space-between; padding: 1rem 2rem; border-top: 1px solid #eee; font-size: .75rem; color: #888; font-family: monospace; }
+@media (max-width: 700px) { .card { grid-template-columns: 1fr; } .photo { width: 180px; height: 180px; } }
 </style>
