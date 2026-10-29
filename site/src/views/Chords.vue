@@ -1,13 +1,12 @@
 <template>
-  <section class="chords">
-    <h1>Unlimit Chords</h1>
-    <p class="muted">Chords tool coming soon — porting from the vanilla app.</p>
-  </section>
+  <div class="redirect">Loading Unlimit Chords…</div>
 </template>
 
-<script setup></script>
+<script setup>
+import { onMounted } from 'vue'
+onMounted(() => { window.location.href = '/chords/' })
+</script>
 
 <style scoped>
-.chords { padding: 4rem 2rem; max-width: 1200px; margin: 0 auto; }
-.muted { color: #8a8a8a; }
+.redirect { display: flex; align-items: center; justify-content: center; height: 100vh; font-family: monospace; color: #8a8a8a; }
 </style>
