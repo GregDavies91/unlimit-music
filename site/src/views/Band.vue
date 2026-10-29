@@ -17,7 +17,7 @@
         <div class="photo placeholder">SS</div>
         <div class="info">
           <h1>smplstcscntsts</h1>
-          <div class="genre">Ambient / Electronic / Experimental</div>
+          <div class="genre">Indie Rock / Trip Hop</div>
           <p class="bio">Simplistic Scientists — exploring the intersection of sound, space, and the metaverse. Creating ambient, electronic, and experimental music that pushes boundaries. First artist on Unlimit Music. Based in the UK, releasing through Unlimit Music.</p>
           <div class="links">
             <a href="https://bandcamp.com" target="_blank" rel="noopener">Bandcamp</a>
