@@ -1,11 +1,10 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home.vue'
-import Band from '../views/Band.vue'
 import Chords from '../views/Chords.vue'
 
 const routes = [
   { path: '/', name: 'home', component: Home },
-  { path: '/smplstcscntsts', name: 'band', component: Band },
+  { path: '/smplstcscntsts', redirect: '/studio/' },
   { path: '/chords', name: 'chords', component: Chords },
 ]
 
