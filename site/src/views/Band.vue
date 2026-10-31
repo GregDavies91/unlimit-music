@@ -46,7 +46,7 @@
 
 <style scoped>
 .page { height: 100vh; display: flex; flex-direction: column; background: #f8f7f4; color: #1a1a1a; margin: 0; overflow: hidden; font-family: 'Inter', system-ui, sans-serif; }
-.topbar { background: #f8f7f4; border-bottom: 1px solid #e5e3df; padding: 1.25rem 2rem; display: flex; align-items: center; justify-content: space-between; }
+.topbar { background: #fff; border-bottom: 1px solid #e5e3df; padding: 1.25rem 2rem; display: flex; align-items: center; justify-content: space-between; }
 .logo { text-decoration: none; }
 .logoimg { height: 20px; }
 nav { display: flex; gap: 2rem; align-items: center; }
