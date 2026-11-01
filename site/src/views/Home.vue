@@ -21,7 +21,7 @@
 </template>
 
 <script setup>
-const _v = 'v3' // cache bust
+const _v = 'v4' // cache bust
 </script>
 
 <style scoped>
