@@ -33,8 +33,8 @@ const _v = 'v5' // cache bust
 .tool:hover { color: #000; }
 .wrap { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2.5rem; padding: 2rem; background: #fff; }
 .logo { height: 28px; }
-.card { display: grid; grid-template-columns: 200px 1fr; gap: 2rem; max-width: 640px; width: 100%; text-decoration: none; color: #000; align-items: center; }
-.photo { width: 200px; height: 200px; background: #f2f2f2; }
+.card { display: grid; grid-template-columns: minmax(160px, 25vw) 1fr; gap: 2rem; max-width: 720px; width: 90%; text-decoration: none; color: #000; align-items: center; }
+.photo { width: 100%; aspect-ratio: 1; background: #f2f2f2; }
 .photo.placeholder { display: flex; align-items: center; justify-content: center; color: #bbb; font-family: 'Space Mono', monospace; font-size: 2.5rem; font-weight: 700; }
 .info h1 { font-family: 'Space Mono', monospace; font-size: 1.6rem; font-weight: 700; text-transform: uppercase; margin-bottom: .25rem; }
 .genre { font-family: 'Space Mono', monospace; font-size: .75rem; color: #999; text-transform: uppercase; letter-spacing: .1em; margin-bottom: .75rem; }
