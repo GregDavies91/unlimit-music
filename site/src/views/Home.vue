@@ -1,8 +1,11 @@
 <template>
   <!-- v2 -->
   <div class="home">
-    <main class="wrap">
+    <header class="topbar">
       <img src="/logo.svg" alt="Unlimit Music" class="logo" />
+      <a href="/chords/" target="_blank" rel="noopener" class="tool">Songwriting Tool</a>
+    </header>
+    <main class="wrap">
       <a href="/studio/" target="_blank" rel="noopener" class="card">
         <div class="photo placeholder">SS</div>
         <div class="info">
@@ -11,7 +14,6 @@
           <p class="bio">Exploring sound, space, and the metaverse.</p>
         </div>
       </a>
-      <a href="/chords/" target="_blank" rel="noopener" class="tool">Songwriting Tool</a>
     </main>
     <footer class="foot">
       <span>info@unlimitmusic.com</span>
@@ -21,7 +23,7 @@
 </template>
 
 <script setup>
-const _v = 'v4' // cache bust
+const _v = 'v5' // cache bust
 </script>
 
 <style scoped>
