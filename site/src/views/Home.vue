@@ -23,7 +23,7 @@
 </template>
 
 <script setup>
-const _v = 'v6' // cache bust
+const _v = 'v7' // cache bust
 </script>
 
 <style scoped>
