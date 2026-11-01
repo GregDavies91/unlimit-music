@@ -12,8 +12,8 @@
         </div>
       </router-link>
       <div class="tools">
-        <a href="/chords/">Unlimit Chords</a>
-        <a href="/studio/">Unlimit Studio</a>
+        <a href="/chords/" target="_blank" rel="noopener">Unlimit Chords</a>
+        <a href="/studio/" target="_blank" rel="noopener">Unlimit Studio</a>
       </div>
     </main>
     <footer class="foot">
