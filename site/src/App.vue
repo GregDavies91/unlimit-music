@@ -1,4 +1,5 @@
 <template>
+  <!-- v2 -->
   <div class="app">
     <main>
       <router-view />
