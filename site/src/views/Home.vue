@@ -1,19 +1,17 @@
 <template>
   <!-- v2 -->
   <div class="home">
-    <header class="topbar">
-      <img src="/logo.svg" alt="Unlimit Music" class="logo" />
-      <a href="/chords/" target="_blank" rel="noopener" class="tool">Songwriting Tool</a>
-    </header>
     <main class="wrap">
-      <router-link to="/smplstcscntsts" class="card">
+      <img src="/logo.svg" alt="Unlimit Music" class="logo" />
+      <a href="/studio/" target="_blank" rel="noopener" class="card">
         <div class="photo placeholder">SS</div>
         <div class="info">
           <h1>Simplistic Scientists</h1>
           <div class="genre">Indie Rock / Trip Hop</div>
           <p class="bio">Exploring sound, space, and the metaverse.</p>
         </div>
-      </router-link>
+      </a>
+      <a href="/chords/" target="_blank" rel="noopener" class="tool">Songwriting Tool</a>
     </main>
     <footer class="foot">
       <span>info@unlimitmusic.com</span>
