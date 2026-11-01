@@ -4,6 +4,7 @@ import Chords from '../views/Chords.vue'
 
 const routes = [
   { path: '/', name: 'home', component: Home },
+  { path: '/smplstcscntsts', redirect: '/studio/' },
   { path: '/chords', name: 'chords', component: Chords },
 ]
 

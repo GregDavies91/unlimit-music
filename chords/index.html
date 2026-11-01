@@ -1,77 +1,14 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Unlimit Chords — Chords &amp; Scales Songwriting Tool</title>
-  <meta name="description" content="Tap a root note to hear it, then tap a chord to hear and see how to play it on guitar. Free guitar chord charts, audio, and a chromatic scales wheel for songwriters." />
-  <link rel="stylesheet" href="style.css?v=2" />
-  <link rel="icon" href="../favicon.ico" />
-</head>
-<body>
-  <div class="app">
-    <nav class="roots" aria-label="Root notes">
-      <div id="rootRow" class="root-col"></div>
-    </nav>
-
-    <main class="stage">
-      <header class="topbar">
-        <a href="/" class="topbtn" style="text-decoration:none;">← Unlimit Music</a>
-        <button id="settingsBtn" class="topbtn" aria-haspopup="true">Settings</button>
-        <button id="scaleBtn" class="topbtn" aria-haspopup="true">Scale</button>
-
-        <div id="scalePanel" class="panel" role="menu" aria-label="Choose a scale"></div>
-
-        <div id="settingsPanel" class="panel" role="dialog" aria-label="Settings">
-          <label class="setting-row">
-            <input type="checkbox" id="followChordsToggle" />
-            <span>Scales wheel follows the chord root</span>
-          </label>
-          <p class="setting-note">Off by default. When on, the wheel's top note
-            tracks the root you pick on the left and you can't spin it manually.</p>
-          <hr style="border-color: var(--line); margin: .6rem 0;" />
-          <a href="../about.html" class="panel-item" style="display:block; text-decoration:none;">About &amp; Contact</a>
-          <a href="../privacy.html" class="panel-item" style="display:block; text-decoration:none;">Privacy Policy</a>
-        </div>
-      </header>
-
-      <div class="stage-mid">
-        <section class="diagrams">
-          <div class="diagram-box" aria-label="Chord diagram">
-            <div class="diagram-stage">
-              <img id="diagramImg" alt="Guitar chord diagram" />
-            </div>
-          </div>
-          <div class="piano-slot" aria-hidden="true"></div>
-        </section>
-
-        <section class="scales-box" aria-label="Scales wheel">
-          <div id="scalesWheel" class="scales-wheel"></div>
-          <div id="scalesCaption" class="scales-caption">Chromatic</div>
-        </section>
-      </div>
-
-      <section class="chords" aria-label="Chords in this key">
-        <div id="chordRow" class="chord-grid"></div>
-      </section>
-    </main>
-  </div>
-
-  <div id="toast" class="toast" role="status" aria-live="polite"></div>
-
-  <div id="onboard" class="onboard">
-    <div class="onboard-arrow" aria-hidden="true">&#11013;</div>
-    <div class="onboard-card">
-      <h2>Start here</h2>
-      <p>Tap a <b>root note</b> on the left to hear it, then tap any chord to hear and see how to play it.</p>
-      <button id="onboardOk" class="onboard-ok">Got it</button>
-    </div>
-  </div>
-
-  <script src="config.js?v=2"></script>
-  <script src="data.js?v=2"></script>
-  <script src="scales.js?v=2"></script>
-  <script src="app.js?v=2"></script>
-
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>chords-vue</title>
+    <script type="module" crossorigin src="./assets/index-CsFnEA3v.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-BhqVC6bT.css">
+  </head>
+  <body>
+    <div id="app"></div>
+  </body>
 </html>

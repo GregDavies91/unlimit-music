@@ -137,6 +137,7 @@ onMounted(() => {
     })
   }
   buildRoots()
+  if (window.initScales) window.initScales()
 })
 </script>
 
