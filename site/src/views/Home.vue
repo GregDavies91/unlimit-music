@@ -1,4 +1,5 @@
 <template>
+  <!-- v2 -->
   <div class="home">
     <main class="wrap">
       <img src="/logo.svg" alt="Unlimit Music" class="logo" />
