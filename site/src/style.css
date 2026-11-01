@@ -1,4 +1,4 @@
-html, body, #app { height: 100%; margin: 0; overflow: hidden; background: #fff; }
+html, body, #app { height: 100%; margin: 0; overflow: hidden; overflow-x: hidden; background: #fff; }
 .photo.placeholder { display: flex; align-items: center; justify-content: center; background: #e8e6e1; color: #8a8a8a; font-family: monospace; font-size: 2rem; font-weight: 700; }
 :root {
   --text: #6b6375;
