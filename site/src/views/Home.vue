@@ -1,9 +1,7 @@
 <template>
   <div class="home">
-    <header class="topbar">
-      <img src="/logo.svg" alt="Unlimit Music" class="logo" />
-    </header>
     <main class="wrap">
+      <img src="/logo.svg" alt="Unlimit Music" class="logo" />
       <router-link to="/smplstcscntsts" class="card">
         <div class="photo placeholder">SS</div>
         <div class="info">
@@ -27,10 +25,9 @@
 <script setup></script>
 
 <style scoped>
-.home { height: 100vh; display: flex; flex-direction: column; background: #fff; color: #000; margin: 0; overflow: hidden; font-family: 'Inter', system-ui, sans-serif; }
-.topbar { padding: 2rem; display: flex; justify-content: center; background: #fff; }
-.logo { height: 24px; }
-.wrap { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3rem; padding: 2rem; }
+.home { height: 100vh; width: 100vw; display: flex; flex-direction: column; background: #fff; color: #000; margin: 0; overflow: hidden; font-family: 'Inter', system-ui, sans-serif; }
+.wrap { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2.5rem; padding: 2rem; background: #fff; }
+.logo { height: 28px; }
 .card { display: grid; grid-template-columns: 200px 1fr; gap: 2rem; max-width: 640px; width: 100%; text-decoration: none; color: #000; align-items: center; }
 .photo { width: 200px; height: 200px; background: #f2f2f2; }
 .photo.placeholder { display: flex; align-items: center; justify-content: center; color: #bbb; font-family: 'Space Mono', monospace; font-size: 2.5rem; font-weight: 700; }
@@ -40,6 +37,6 @@
 .tools { display: flex; gap: 2.5rem; }
 .tools a { font-family: 'Space Mono', monospace; font-size: .8rem; text-transform: uppercase; letter-spacing: .1em; color: #999; text-decoration: none; transition: color .2s; }
 .tools a:hover { color: #000; }
-.foot { display: flex; justify-content: space-between; padding: 1.5rem 2rem; font-size: .7rem; color: #bbb; font-family: 'Space Mono', monospace; letter-spacing: .1em; }
+.foot { display: flex; justify-content: space-between; padding: 1.5rem 2rem; font-size: .7rem; color: #bbb; font-family: 'Space Mono', monospace; letter-spacing: .1em; background: #fff; }
 @media (max-width: 700px) { .card { grid-template-columns: 1fr; text-align: center; } .photo { margin: 0 auto; } }
 </style>
