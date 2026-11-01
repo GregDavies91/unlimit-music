@@ -23,7 +23,9 @@
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+const _v = 'v3' // cache bust
+</script>
 
 <style scoped>
 .home { height: 100vh; width: 100vw; display: flex; flex-direction: column; background: #fff; color: #000; margin: 0; overflow: hidden; font-family: 'Inter', system-ui, sans-serif; }
